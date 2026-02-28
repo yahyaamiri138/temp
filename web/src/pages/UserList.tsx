@@ -166,15 +166,15 @@ const UserList = () => {
 
   // ================= ACTION COLUMN =================
   const actionBody = (rowData: any) => (
-    <div className="d-flex justify-content-between">
+    <div className="d-flex justify-content-start">
       <i
-        className="pi pi-eye text-info fs-5"
+        className="pi pi-eye text-info fs-5 mr-2"
         onClick={() => handleView(rowData)}
         title="View"
       />
 
       <i
-        className="pi pi-pencil text-primary fs-5"
+        className="pi pi-pencil text-primary fs-5 mr-2"
         onClick={() => handleEdit(rowData)}
         title="Edit"
       />
@@ -204,7 +204,7 @@ const UserList = () => {
         </div>
 
         <DataTable value={users} paginator rows={5} responsiveLayout="scroll">
-          <Column field="id" header="ID" sortable />
+          {/* <Column field="id" header="ID" sortable /> */}
           <Column field="username" header="Username" sortable />
           <Column field="role" header="Role" sortable />
           <Column field="firstName" header="First Name" sortable />
