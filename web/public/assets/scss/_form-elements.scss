@@ -1,0 +1,47 @@
+/* ==============
+  Form-elements
+===================*/
+
+.form-control {
+  &:focus {
+    border-color: $primary;
+    box-shadow: none;
+  }
+}
+
+.custom-checkbox {
+  .custom-control-input:checked~.custom-control-label::before {
+  background-color: $primary;
+  }
+  .custom-control-input:focus~.custom-control-label::before {
+    -webkit-box-shadow: 0 0 0 1px $white, 0 0 0 3px $primary;
+    box-shadow: 0 0 0 1px $white, 0 0 0 3px $primary;
+  }
+}
+
+.has-success {
+  .form-control {
+    border-color: $success;
+    box-shadow: none;
+  }
+  .col-form-label,
+  .form-control-feedback{
+    color: $success;
+  }
+}
+
+.has-danger {
+  .form-control {
+    border-color: $danger;
+    box-shadow: none;
+  }
+  .col-form-label,
+  .form-control-feedback{
+    color: $danger;
+  }
+}
+
+.input-group-addon {
+  border-radius: 2px;
+  border: 1px solid $light;
+}
