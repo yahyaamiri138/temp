@@ -3,14 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0f172a;
+  background: #fefefe;
 }
 
 .auth-card {
-  width: 900px;
-  height: 550px;
+  width: 50%;
+  height: 69vh;
   display: flex;
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
   background: white;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
@@ -24,27 +24,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 0.1px;
 }
 
-.auth-left-content h1 {
-  font-size: 40px;
-  margin-bottom: 20px;
-}
-
-.auth-left-content p {
-  font-size: 14px;
-  margin-bottom: 30px;
-}
-
-.view-btn {
-  padding: 10px 20px;
-  border-radius: 25px;
-  border: none;
-  background: white;
-  color: #1d4ed8;
-  cursor: pointer;
-  font-weight: bold;
+.auth-logo {
+  max-width: 100%;
+  height: auto;
 }
 
 /* RIGHT SIDE */

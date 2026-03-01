@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom"; // 👈 این را اضافه کن
 import "./index.css";
 import App from "./App.tsx";
+import "./i18n";
 
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";

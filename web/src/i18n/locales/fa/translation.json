@@ -1,0 +1,35 @@
+{
+  "common": {
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "search": "جستجو",
+    "language": "زبان"
+  },
+  "auth": {
+    "login": "ورود",
+    "username": "نام کاربری",
+    "password": "رمز عبور"
+  },
+  "dashboard": {
+    "title": "داشبورد"
+  },
+  "users": {
+    "title": "مدیریت کاربران"
+  },
+  "validation": {
+    "required": "این فیلد الزامی است"
+  },
+  "sidebar": {
+    "adminPanel": "پنل مدیریت",
+    "dashboard": "داشبورد",
+    "users": "کاربران",
+    "reports": "گزارش‌ها",
+    "logout": "خروج"
+  },
+  "topbar": {
+    "settings": "تنظیمات",
+    "profile": "پروفایل",
+    "english": "انگلیسی",
+    "farsi": "دری"
+  }
+}

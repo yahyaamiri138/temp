@@ -205,12 +205,12 @@ const UserList = () => {
 
         <DataTable value={users} paginator rows={5} responsiveLayout="scroll">
           {/* <Column field="id" header="ID" sortable /> */}
-          <Column field="username" header="Username" sortable />
-          <Column field="role" header="Role" sortable />
           <Column field="firstName" header="First Name" sortable />
           <Column field="lastName" header="Last Name" sortable />
           <Column field="email" header="Email" sortable />
           <Column field="gender" header="Gender" sortable />
+          <Column field="username" header="Username" sortable />
+          <Column field="role" header="Role" sortable />
           <Column header="Actions" body={actionBody} />
         </DataTable>
       </div>
@@ -228,7 +228,7 @@ const UserList = () => {
       <Dialog
         header="User Details"
         visible={viewVisible}
-        style={{ width: "500px" }}
+        style={{ width: "80vh" }}
         onHide={() => setViewVisible(false)}
         modal
       >
@@ -236,32 +236,32 @@ const UserList = () => {
           <Card className="shadow-3 border-round">
             <div className="row g-3">
               <div className="col-md-6">
-                <b>First Name</b>
+                <b className="text-dark">First Name</b>
                 <div>{viewUser.firstName}</div>
               </div>
 
-              <div className="col-md-6">
-                <b>Last Name</b>
+              <div className="col-md-6 mt-1">
+                <b className="text-dark">Last Name</b>
                 <div>{viewUser.lastName}</div>
               </div>
 
-              <div className="col-md-6">
-                <b>Email</b>
+              <div className="col-md-6 mt-1">
+                <b className="text-dark">Email</b>
                 <div>{viewUser.email}</div>
               </div>
 
-              <div className="col-md-6">
-                <b>Gender</b>
+              <div className="col-md-6 mt-1">
+                <b className="text-dark">Gender</b>
                 <div>{viewUser.gender}</div>
               </div>
 
-              <div className="col-md-6">
-                <b>Username</b>
+              <div className="col-md-6 mt-1">
+                <b className="text-dark">Username</b>
                 <div>{viewUser.username}</div>
               </div>
 
-              <div className="col-md-6">
-                <b>Role</b>
+              <div className="col-md-6 mt-1">
+                <b className="text-dark">Role</b>
                 <div>
                   <Tag
                     value={viewUser.role}

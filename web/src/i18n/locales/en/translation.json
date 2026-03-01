@@ -1,0 +1,36 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "language": "Language"
+  },
+  "auth": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "users": {
+    "title": "User Management"
+  },
+  "validation": {
+    "required": "This field is required"
+  },
+
+  "sidebar": {
+    "adminPanel": "Admin Panel",
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "reports": "Reports",
+    "logout": "Logout"
+  },
+  "topbar": {
+    "settings": "Settings",
+    "profile": "Profile",
+    "english": "English",
+    "farsi": "Dari"
+  }
+}
