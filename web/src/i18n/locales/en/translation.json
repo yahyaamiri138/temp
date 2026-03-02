@@ -70,5 +70,18 @@
   "roles": {
     "ROLE_ADMIN": "Administrator",
     "ROLE_USER": "User"
+  },
+  "reports": {
+    "title": "Reports",
+    "description": "This is the reports page. Here you can manage and view system reports.",
+    "selectDateRange": "Select Date Range",
+    "exportExcel": "Export Excel",
+    "totalUsers": "Total Users",
+    "adminUsers": "Admin Users",
+    "normalUsers": "Normal Users",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "search": "Search",
+    "reset": "Reset"
   }
 }

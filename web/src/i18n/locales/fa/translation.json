@@ -70,5 +70,18 @@
   "roles": {
     "ROLE_ADMIN": "مدیر",
     "ROLE_USER": "کاربر"
+  },
+  "reports": {
+    "title": "گزارشات",
+    "description": "در این بخش می‌توانید گزارش‌های سیستم را مشاهده و مدیریت کنید.",
+    "selectDateRange": "انتخاب بازه زمانی",
+    "exportExcel": "خروجی اکسل",
+    "totalUsers": "کل کاربران",
+    "adminUsers": "کاربران مدیر",
+    "normalUsers": "کاربران عادی",
+    "startDate": "تاریخ شروع",
+    "endDate": "تاریخ ختم",
+    "search": "جستجو",
+    "reset": "پاک کردن"
   }
 }
