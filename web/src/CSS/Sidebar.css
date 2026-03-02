@@ -16,9 +16,11 @@
   transform: translateX(0);
 }
 
+/* Desktop mode */
 @media (min-width: 992px) {
   .sidebar {
-    transform: translateX(0);
+    position: relative;
+    transform: none;
   }
 }
 
@@ -150,13 +152,17 @@
   height: 60px;
 }
 
-/* ===== Desktop Content Offset ===== */
+/* ===== RTL Support ===== */
 
-.content-offset {
-  margin-left: 250px;
+html[dir="rtl"] .sidebar {
+  left: auto;
+  right: 0;
 }
 
-/* RTL Support */
-html[dir="rtl"] .sidebar {
+html[dir="rtl"] .sidebar-menu a {
+  text-align: right;
+}
+
+html[dir="rtl"] .logout-btn {
   text-align: right;
 }

@@ -5,20 +5,17 @@
     "search": "جستجو",
     "language": "زبان"
   },
+
   "auth": {
     "login": "ورود",
     "username": "نام کاربری",
     "password": "رمز عبور"
   },
+
   "dashboard": {
     "title": "داشبورد"
   },
-  "users": {
-    "title": "مدیریت کاربران"
-  },
-  "validation": {
-    "required": "این فیلد الزامی است"
-  },
+
   "sidebar": {
     "adminPanel": "پنل مدیریت",
     "dashboard": "داشبورد",
@@ -26,10 +23,52 @@
     "reports": "گزارش‌ها",
     "logout": "خروج"
   },
+
   "topbar": {
     "settings": "تنظیمات",
     "profile": "پروفایل",
     "english": "انگلیسی",
     "farsi": "دری"
+  },
+
+  "users": {
+    "title": "مدیریت کاربران",
+    "addUser": "افزودن کاربر",
+    "firstName": "نام",
+    "lastName": "تخلص",
+    "email": "ایمیل",
+    "gender": "جنسیت",
+    "username": "نام کاربری",
+    "role": "نقش",
+    "actions": "عملیات",
+    "view": "نمایش",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "userDetails": "جزئیات کاربر",
+    "confirmDeleteMessage": "آیا مطمئن هستید که می‌خواهید این کاربر را حذف کنید؟",
+    "confirmation": "تایید",
+    "error": "خطا",
+    "cannotFetchUsers": "نمی‌توان کاربران را دریافت کرد",
+    "deleted": "حذف شد",
+    "userDeletedSuccessfully": "کاربر موفقانه حذف شد",
+    "updated": "بروزرسانی شد",
+    "userUpdatedSuccessfully": "کاربر موفقانه بروزرسانی شد",
+    "created": "ایجاد شد",
+    "userCreatedSuccessfully": "کاربر موفقانه ایجاد شد",
+    "somethingWentWrong": "مشکلی رخ داده است!",
+    "accessDenied": "دسترسی رد شد",
+    "onlyAdminsAdd": "فقط ادمین‌ها می‌توانند کاربر اضافه کنند",
+    "onlyAdminsCreate": "فقط ادمین‌ها می‌توانند کاربر ایجاد کنند",
+    "male": "مرد",
+    "female": "زن",
+    "other": "دیگر"
+  },
+
+  "validation": {
+    "required": "این فیلد الزامی است"
+  },
+  "roles": {
+    "ROLE_ADMIN": "مدیر",
+    "ROLE_USER": "کاربر"
   }
 }

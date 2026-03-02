@@ -5,19 +5,15 @@
     "search": "Search",
     "language": "Language"
   },
+
   "auth": {
     "login": "Login",
     "username": "Username",
     "password": "Password"
   },
+
   "dashboard": {
     "title": "Dashboard"
-  },
-  "users": {
-    "title": "User Management"
-  },
-  "validation": {
-    "required": "This field is required"
   },
 
   "sidebar": {
@@ -27,10 +23,52 @@
     "reports": "Reports",
     "logout": "Logout"
   },
+
   "topbar": {
     "settings": "Settings",
     "profile": "Profile",
     "english": "English",
     "farsi": "Dari"
+  },
+
+  "users": {
+    "title": "User Management",
+    "addUser": "Add User",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "gender": "Gender",
+    "username": "Username",
+    "role": "Role",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "userDetails": "User Details",
+    "confirmDeleteMessage": "Are you sure you want to delete this user?",
+    "confirmation": "Confirmation",
+    "error": "Error",
+    "cannotFetchUsers": "Cannot fetch users",
+    "deleted": "Deleted",
+    "userDeletedSuccessfully": "User deleted successfully",
+    "updated": "Updated",
+    "userUpdatedSuccessfully": "User updated successfully",
+    "created": "Created",
+    "userCreatedSuccessfully": "User created successfully",
+    "somethingWentWrong": "Something went wrong!",
+    "accessDenied": "Access Denied",
+    "onlyAdminsAdd": "Only admins can add users",
+    "onlyAdminsCreate": "Only admins can create users",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+
+  "validation": {
+    "required": "This field is required"
+  },
+  "roles": {
+    "ROLE_ADMIN": "Administrator",
+    "ROLE_USER": "User"
   }
 }

@@ -18,6 +18,7 @@ import {
 
 import type { AppDispatch, RootState } from "../app/stores";
 import UserForm from "./UserForm";
+import { useTranslation } from "react-i18next";
 
 // Helper to get user role from JWT token
 const getUserRole = (): string | null => {
@@ -36,6 +37,7 @@ const UserList = () => {
   const { users } = useSelector((state: RootState) => state.users);
 
   const toast = useRef<Toast>(null);
+  const { t } = useTranslation();
 
   const [formVisible, setFormVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
@@ -56,8 +58,10 @@ const UserList = () => {
       .catch(() => {
         toast.current?.show({
           severity: "error",
-          summary: "Error",
-          detail: "Cannot fetch users",
+          // summary: "Error",
+          // detail: "Cannot fetch users",
+          summary: t("users.error"),
+          detail: t("users.somethingWentWrong"),
         });
       });
   }, [dispatch]);
@@ -65,15 +69,19 @@ const UserList = () => {
   // ================= DELETE =================
   const handleDelete = (id: number) => {
     confirmDialog({
-      message: "Are you sure you want to delete this user?",
-      header: "Confirmation",
+      // message: "Are you sure you want to delete this user?",
+      // header: "Confirmation",
+      message: t("users.deleteConfirm"),
+      header: t("common.confirmation"),
       icon: "pi pi-exclamation-triangle",
       accept: async () => {
         await dispatch(deleteUser(id));
         toast.current?.show({
           severity: "success",
-          summary: "Deleted",
-          detail: "User deleted successfully",
+          // summary: "Deleted",
+          // detail: "User deleted successfully",
+          summary: t("users.deleted"),
+          detail: t("users.userDeletedSuccessfully"),
         });
         dispatch(fetchUsers());
       },
@@ -92,8 +100,10 @@ const UserList = () => {
     if (role !== "ROLE_ADMIN") {
       toast.current?.show({
         severity: "warn",
-        summary: "Access Denied",
-        detail: "Only admins can add users",
+        // summary: "Access Denied",
+        // detail: "Only admins can add users",
+        summary: t("users.accessDenied"),
+        detail: t("users.onlyAdminsAdd"),
       });
       return;
     }
@@ -122,8 +132,10 @@ const UserList = () => {
         if (updateUser.fulfilled.match(result)) {
           toast.current?.show({
             severity: "success",
-            summary: "Updated",
-            detail: "User updated successfully",
+            // summary: "Updated",
+            // detail: "User updated successfully",
+            summary: t("users.updated"),
+            detail: t("users.userUpdatedSuccessfully"),
           });
         }
       } else {
@@ -131,7 +143,8 @@ const UserList = () => {
           toast.current?.show({
             severity: "warn",
             summary: "Access Denied",
-            detail: "Only admins can create users",
+            // detail: "Only admins can create users",
+            detail: t("users.onlyAdminsCreate"),
           });
           return;
         }
@@ -141,8 +154,10 @@ const UserList = () => {
         if (createUser.fulfilled.match(result)) {
           toast.current?.show({
             severity: "success",
-            summary: "Created",
-            detail: "User created successfully",
+            // summary: "Created",
+            // detail: "User created successfully",
+            summary: t("users.created"),
+            detail: t("users.userCreatedSuccessfully"),
           });
         }
       }
@@ -152,8 +167,10 @@ const UserList = () => {
     } catch (error) {
       toast.current?.show({
         severity: "error",
-        summary: "Error",
-        detail: "Something went wrong!",
+        // summary: "Error",
+        // detail: "Something went wrong!",
+        summary: t("users.error"),
+        detail: t("users.cannotFetchUsers"),
       });
     }
   };
@@ -187,6 +204,10 @@ const UserList = () => {
     </div>
   );
 
+  const genderBody = (rowData: any) => {
+    return t(`users.${rowData.gender?.toLowerCase()}`);
+  };
+
   return (
     <div className="card shadow-sm">
       <Toast ref={toast} />
@@ -194,9 +215,9 @@ const UserList = () => {
 
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
-          <h5>User Management</h5>
+          <h5>{t("users.title")}</h5>
           <Button
-            label="Add User"
+            label={t("users.addUser")}
             icon="pi pi-plus"
             className="btn btn-sm p-button-primary rounded"
             onClick={handleAdd}
@@ -205,13 +226,18 @@ const UserList = () => {
 
         <DataTable value={users} paginator rows={5} responsiveLayout="scroll">
           {/* <Column field="id" header="ID" sortable /> */}
-          <Column field="firstName" header="First Name" sortable />
-          <Column field="lastName" header="Last Name" sortable />
-          <Column field="email" header="Email" sortable />
-          <Column field="gender" header="Gender" sortable />
-          <Column field="username" header="Username" sortable />
-          <Column field="role" header="Role" sortable />
-          <Column header="Actions" body={actionBody} />
+          <Column field="firstName" header={t("users.firstName")} sortable />
+          <Column field="lastName" header={t("users.lastName")} sortable />
+          <Column field="email" header={t("users.email")} sortable />
+          <Column
+            field="gender"
+            header={t("users.gender")}
+            body={genderBody}
+            sortable
+          />
+          <Column field="username" header={t("users.username")} sortable />
+          <Column field="role" header={t("users.role")} sortable />
+          <Column header={t("users.actions")} body={actionBody} />
         </DataTable>
       </div>
 
@@ -226,7 +252,8 @@ const UserList = () => {
 
       {/* ================= VIEW DIALOG ================= */}
       <Dialog
-        header="User Details"
+        // header="User Details"
+        header={t("users.userDetails")}
         visible={viewVisible}
         style={{ width: "80vh" }}
         onHide={() => setViewVisible(false)}
@@ -236,32 +263,38 @@ const UserList = () => {
           <Card className="shadow-3 border-round">
             <div className="row g-3">
               <div className="col-md-6">
-                <b className="text-dark">First Name</b>
+                {/* <b className="text-dark">First Name</b> */}
+                <b>{t("users.firstName")}</b>
                 <div>{viewUser.firstName}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                <b className="text-dark">Last Name</b>
+                {/* <b className="text-dark">Last Name</b> */}
+                <b>{t("users.lastName")}</b>
                 <div>{viewUser.lastName}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                <b className="text-dark">Email</b>
+                {/* <b className="text-dark">Email</b> */}
+                <b>{t("users.email")}</b>
                 <div>{viewUser.email}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                <b className="text-dark">Gender</b>
+                {/* <b className="text-dark">Gender</b> */}
+                <b>{t("users.gender")}</b>
                 <div>{viewUser.gender}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                <b className="text-dark">Username</b>
+                {/* <b className="text-dark">Username</b> */}
+                <b>{t("users.username")}</b>
                 <div>{viewUser.username}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                <b className="text-dark">Role</b>
+                {/* <b className="text-dark">Role</b> */}
+                <b>{t("users.role")}</b>
                 <div>
                   <Tag
                     value={viewUser.role}

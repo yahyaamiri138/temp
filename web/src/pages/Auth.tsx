@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch, RootState } from "../app/stores";
-import "./Auth.css";
+import "../CSS/Auth.css";
 import MCITLogo from "../assets/MCITLogo.png";
 import { useTranslation } from "react-i18next";
 
