@@ -17,7 +17,7 @@ const Reports = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const { users } = useSelector((state: RootState) => state.users);
-
+  const isRTL = i18n.dir() === "rtl";
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -82,6 +82,35 @@ const Reports = () => {
       severity={rowData.role === "ROLE_ADMIN" ? "danger" : "info"}
     />
   );
+  type FLProps = {
+    label: React.ReactNode;
+    value: any;
+    htmlFor?: string;
+    isRTL?: boolean;
+  };
+
+  const FloatingLabel = ({ label, value, htmlFor, isRTL = false }: FLProps) => {
+    const hasValue = value !== null && value !== undefined && value !== "";
+    return (
+      <label
+        htmlFor={htmlFor}
+        className={`position-absolute px-1 ${hasValue ? "label-float" : ""}`}
+        style={{
+          top: hasValue ? "-0.5rem" : "0.5rem", // وقتی مقدار دارد لیبل بالا می‌رود
+          [isRTL ? "right" : "left"]: "0.6rem", // برای RTL و LTR
+          backgroundColor: hasValue ? "white" : "transparent",
+          // backgroundColor: "white",
+          padding: "0 4px",
+          transition: "0.2s ease",
+          zIndex: 2,
+          pointerEvents: "none",
+          fontSize: hasValue ? "0.8rem" : "1rem",
+        }}
+      >
+        {label}
+      </label>
+    );
+  };
 
   return (
     <div className="card shadow-sm">
@@ -90,25 +119,87 @@ const Reports = () => {
         <h5 className="mb-4">{t("reports.title")}</h5>
 
         {/* ================= FILTER SECTION ================= */}
-        <div className="d-flex flex-wrap align-items-end gap-3 mb-4">
+        <div className="d-flex flex-wrap align-items-start gap-3 mb-4">
           {/* Start Date */}
-          <div>
-            <label className="form-label">{t("reports.startDate")}</label>
+          <div
+            className="position-relative"
+            dir={isRTL ? "rtl" : "ltr"}
+            style={{ minWidth: "220px" }}
+          >
+            <FloatingLabel
+              label={t("reports.startDate")}
+              value={startDate}
+              htmlFor="startDate"
+              isRTL={isRTL}
+            />
+
             <Calendar
+              id="startDate"
               value={startDate}
               onChange={(e) => setStartDate(e.value as Date)}
-              showIcon
+              showIcon={false}
+              inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
+              style={{ width: "100%", height: "2.5rem" }}
+              inputStyle={{
+                paddingRight: isRTL ? undefined : "2.5rem",
+                paddingLeft: isRTL ? "2.5rem" : undefined,
+              }}
+            />
+
+            <i
+              className={`bi ${startDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
+              onClick={() => startDate && setStartDate(null)}
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                [isRTL ? "left" : "right"]: "10px",
+                cursor: startDate ? "pointer" : "default",
+                fontSize: "0.9rem",
+                zIndex: 3,
+              }}
             />
           </div>
 
           {/* End Date */}
-          <div>
-            <label className="form-label">{t("reports.endDate")}</label>
+          <div
+            className="position-relative"
+            dir={isRTL ? "rtl" : "ltr"}
+            style={{ minWidth: "220px" }}
+          >
+            <FloatingLabel
+              label={t("reports.endDate")}
+              value={endDate}
+              htmlFor="endDate"
+              isRTL={isRTL}
+            />
+
             <Calendar
+              id="endDate"
               value={endDate}
               onChange={(e) => setEndDate(e.value as Date)}
-              showIcon
               minDate={startDate || undefined}
+              showIcon={false}
+              inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
+              style={{ width: "100%", height: "2.5rem" }}
+              inputStyle={{
+                paddingRight: isRTL ? undefined : "2.5rem",
+                paddingLeft: isRTL ? "2.5rem" : undefined,
+              }}
+            />
+
+            <i
+              className={`bi ${endDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
+              onClick={() => endDate && setEndDate(null)}
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                [isRTL ? "left" : "right"]: "10px",
+                cursor: endDate ? "pointer" : "default",
+                fontSize: "0.9rem",
+                zIndex: 3,
+              }}
             />
           </div>
 
@@ -118,14 +209,6 @@ const Reports = () => {
             icon="pi pi-search"
             className="p-button-primary"
             onClick={handleSearch}
-          />
-
-          {/* Reset Button */}
-          <Button
-            label={t("reports.reset")}
-            icon="pi pi-refresh"
-            className="p-button-secondary"
-            onClick={handleReset}
           />
         </div>
 

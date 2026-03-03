@@ -59,7 +59,7 @@ const Sidebar = () => {
                   className={location.pathname === "/dashboard" ? "active" : ""}
                   onClick={closeSidebar}
                 >
-                  <i className="mdi mdi-view-dashboard me-2" />
+                  <i className="mdi mdi-view-dashboard mr-2 ml-2" />
                   {t("sidebar.dashboard")}
                 </Link>
               </li>
@@ -70,7 +70,7 @@ const Sidebar = () => {
                   className={location.pathname === "/users" ? "active" : ""}
                   onClick={closeSidebar}
                 >
-                  <i className="mdi mdi-account me-2" />
+                  <i className="mdi mdi-account mr-2 ml-2" />
                   {t("sidebar.users")}
                 </Link>
               </li>
@@ -81,7 +81,7 @@ const Sidebar = () => {
                   className={location.pathname === "/reports" ? "active" : ""}
                   onClick={closeSidebar}
                 >
-                  <i className="mdi mdi-chart-line me-2" />
+                  <i className="mdi mdi-poll mr-2 ml-2" />
                   {t("sidebar.reports")}
                 </Link>
               </li>
@@ -96,7 +96,7 @@ const Sidebar = () => {
               }}
               className="logout-btn"
             >
-              <i className="mdi mdi-logout me-2" />
+              <i className="mdi mdi-logout mr-2 ml-2" />
               {t("sidebar.logout")}
             </Button>
           </div>
