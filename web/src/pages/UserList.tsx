@@ -35,31 +35,24 @@ const getUserRole = (): string | null => {
 const UserList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { users } = useSelector((state: RootState) => state.users);
-
   const toast = useRef<Toast>(null);
   const { t } = useTranslation();
-
   const [formVisible, setFormVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-
   const [viewVisible, setViewVisible] = useState(false);
   const [viewUser, setViewUser] = useState<any>(null);
-
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
     // Get current user role
     setRole(getUserRole());
-
     // Fetch all users
     dispatch(fetchUsers())
       .unwrap()
       .catch(() => {
         toast.current?.show({
           severity: "error",
-          // summary: "Error",
-          // detail: "Cannot fetch users",
           summary: t("users.error"),
           detail: t("users.somethingWentWrong"),
         });
@@ -69,8 +62,6 @@ const UserList = () => {
   // ================= DELETE =================
   const handleDelete = (id: number) => {
     confirmDialog({
-      // message: "Are you sure you want to delete this user?",
-      // header: "Confirmation",
       message: t("users.deleteConfirm"),
       header: t("common.confirmation"),
       icon: "pi pi-exclamation-triangle",
@@ -78,8 +69,6 @@ const UserList = () => {
         await dispatch(deleteUser(id));
         toast.current?.show({
           severity: "success",
-          // summary: "Deleted",
-          // detail: "User deleted successfully",
           summary: t("users.deleted"),
           detail: t("users.userDeletedSuccessfully"),
         });
@@ -100,8 +89,6 @@ const UserList = () => {
     if (role !== "ROLE_ADMIN") {
       toast.current?.show({
         severity: "warn",
-        // summary: "Access Denied",
-        // detail: "Only admins can add users",
         summary: t("users.accessDenied"),
         detail: t("users.onlyAdminsAdd"),
       });
@@ -125,15 +112,11 @@ const UserList = () => {
   const handleFormSubmit = async (user: any, editMode: boolean) => {
     try {
       let result;
-
       if (editMode) {
         result = await dispatch(updateUser(user));
-
         if (updateUser.fulfilled.match(result)) {
           toast.current?.show({
             severity: "success",
-            // summary: "Updated",
-            // detail: "User updated successfully",
             summary: t("users.updated"),
             detail: t("users.userUpdatedSuccessfully"),
           });
@@ -143,32 +126,24 @@ const UserList = () => {
           toast.current?.show({
             severity: "warn",
             summary: "Access Denied",
-            // detail: "Only admins can create users",
             detail: t("users.onlyAdminsCreate"),
           });
           return;
         }
-
         result = await dispatch(createUser(user));
-
         if (createUser.fulfilled.match(result)) {
           toast.current?.show({
             severity: "success",
-            // summary: "Created",
-            // detail: "User created successfully",
             summary: t("users.created"),
             detail: t("users.userCreatedSuccessfully"),
           });
         }
       }
-
       setFormVisible(false);
       dispatch(fetchUsers());
     } catch (error) {
       toast.current?.show({
         severity: "error",
-        // summary: "Error",
-        // detail: "Something went wrong!",
         summary: t("users.error"),
         detail: t("users.cannotFetchUsers"),
       });
@@ -185,21 +160,19 @@ const UserList = () => {
   const actionBody = (rowData: any) => (
     <div className="d-flex justify-content-start">
       <i
-        className="pi pi-eye text-info fs-5 mr-2"
+        className="pi pi-eye text-info fs-5 me-2"
         onClick={() => handleView(rowData)}
-        title="View"
+        title={t("users.view")}
       />
-
       <i
-        className="pi pi-pencil text-primary fs-5 mr-2"
+        className="pi pi-pencil text-primary fs-5 me-2"
         onClick={() => handleEdit(rowData)}
-        title="Edit"
+        title={t("users.edit")}
       />
-
       <i
         className="pi pi-trash text-danger fs-5"
         onClick={() => handleDelete(rowData.id)}
-        title="Delete"
+        title={t("users.delete")}
       />
     </div>
   );
@@ -212,7 +185,6 @@ const UserList = () => {
     <div className="card shadow-sm">
       <Toast ref={toast} />
       <ConfirmDialog />
-
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
           <h5>{t("users.title")}</h5>
@@ -223,7 +195,6 @@ const UserList = () => {
             onClick={handleAdd}
           />
         </div>
-
         <DataTable value={users} paginator rows={5} responsiveLayout="scroll">
           {/* <Column field="id" header="ID" sortable /> */}
           <Column field="firstName" header={t("users.firstName")} sortable />
@@ -240,7 +211,6 @@ const UserList = () => {
           <Column header={t("users.actions")} body={actionBody} />
         </DataTable>
       </div>
-
       {/* ================= USER FORM (CREATE / EDIT) ================= */}
       <UserForm
         visible={formVisible}
@@ -249,10 +219,8 @@ const UserList = () => {
         initialData={selectedUser}
         isEditMode={isEditMode}
       />
-
       {/* ================= VIEW DIALOG ================= */}
       <Dialog
-        // header="User Details"
         header={t("users.userDetails")}
         visible={viewVisible}
         style={{ width: "80vh" }}
@@ -269,31 +237,26 @@ const UserList = () => {
               </div>
 
               <div className="col-md-6 mt-1">
-                {/* <b className="text-dark">Last Name</b> */}
                 <b>{t("users.lastName")}</b>
                 <div>{viewUser.lastName}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                {/* <b className="text-dark">Email</b> */}
                 <b>{t("users.email")}</b>
                 <div>{viewUser.email}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                {/* <b className="text-dark">Gender</b> */}
                 <b>{t("users.gender")}</b>
                 <div>{viewUser.gender}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                {/* <b className="text-dark">Username</b> */}
                 <b>{t("users.username")}</b>
                 <div>{viewUser.username}</div>
               </div>
 
               <div className="col-md-6 mt-1">
-                {/* <b className="text-dark">Role</b> */}
                 <b>{t("users.role")}</b>
                 <div>
                   <Tag
