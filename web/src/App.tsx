@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import UserList from "./pages/UserList";
 import RegisterForm from "./pages/RegisterForm";
+import Reports from "./pages/Report";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
       >
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="users" element={<UserList />} />
-
+        <Route path="reports" element={<Reports />} />
         {/* Add more protected routes here */}
       </Route>
     </Routes>
