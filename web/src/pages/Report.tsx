@@ -9,9 +9,9 @@ import { Tag } from "primereact/tag";
 import { useTranslation } from "react-i18next";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-
 import type { AppDispatch, RootState } from "../app/stores";
 import { fetchUsers } from "../features/users/userSlice";
+import "../CSS/Report.css";
 
 const Reports = () => {
   const { t, i18n } = useTranslation();
@@ -116,16 +116,13 @@ const Reports = () => {
     <div className="card shadow-sm">
       <div className="card-body">
         {/* ================= TITLE ================= */}
-        <h5 className="mb-4">{t("reports.title")}</h5>
-
+        <h5 className="mb-4" style={{ textAlign: isRTL ? "right" : "left" }}>
+          {t("reports.title")}
+        </h5>
         {/* ================= FILTER SECTION ================= */}
-        <div className="d-flex flex-wrap align-items-start gap-3 mb-4">
+        <div className="d-flex flex-wrap justify-content-start mb-3">
           {/* Start Date */}
-          <div
-            className="position-relative"
-            dir={isRTL ? "rtl" : "ltr"}
-            style={{ minWidth: "220px" }}
-          >
+          <div className="position-relative" dir={isRTL ? "rtl" : "ltr"}>
             <FloatingLabel
               label={t("reports.startDate")}
               value={startDate}
@@ -160,7 +157,6 @@ const Reports = () => {
               }}
             />
           </div>
-
           {/* End Date */}
           <div
             className="position-relative"
@@ -202,33 +198,34 @@ const Reports = () => {
               }}
             />
           </div>
-
           {/* Search Button */}
           <Button
-            label={t("reports.search")}
             icon="pi pi-search"
-            className="p-button-primary"
+            className="p-button-primary rounded p-2"
             onClick={handleSearch}
           />
         </div>
 
         {/* ================= STATISTICS ================= */}
-        <div className="row mb-4">
+        <div
+          className="row mb-2"
+          style={{ textAlign: isRTL ? "right" : "left" }}
+        >
           <div className="col-md-4">
-            <Card title={t("reports.totalUsers")}>
-              <h3>{totalUsers}</h3>
+            <Card title={t("reports.totalUsers")} className="small-card">
+              <h5>{totalUsers}</h5>
             </Card>
           </div>
 
           <div className="col-md-4">
-            <Card title={t("reports.adminUsers")}>
-              <h3>{adminCount}</h3>
+            <Card title={t("reports.adminUsers")} className="small-card">
+              <h5>{adminCount}</h5>
             </Card>
           </div>
 
           <div className="col-md-4">
-            <Card title={t("reports.normalUsers")}>
-              <h3>{userCount}</h3>
+            <Card title={t("reports.normalUsers")} className="small-card">
+              <h5>{userCount}</h5>
             </Card>
           </div>
         </div>

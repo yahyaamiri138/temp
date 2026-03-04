@@ -1,0 +1,12 @@
+.small-card .p-card-body {
+  padding: 0.5rem 0.75rem 0rem !important;
+}
+
+.small-card .p-card-title {
+  margin-bottom: 0 !important;
+  font-size: 1rem;
+}
+
+.small-card .p-card-content {
+  padding-top: 0 !important;
+}
