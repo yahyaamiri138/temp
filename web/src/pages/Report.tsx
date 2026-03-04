@@ -51,29 +51,9 @@ const Reports = () => {
     (u: any) => u.role === "ROLE_USER",
   ).length;
 
-  // ================= EXPORT EXCEL =================
-  const exportExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(filteredUsers);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
-    saveAs(data, "users-report.xlsx");
-  };
-
   const handleSearch = () => {
     setAppliedStartDate(startDate);
     setAppliedEndDate(endDate);
-  };
-
-  const handleReset = () => {
-    setStartDate(null);
-    setEndDate(null);
-    setAppliedStartDate(null);
-    setAppliedEndDate(null);
   };
 
   const roleBody = (rowData: any) => (
@@ -82,6 +62,7 @@ const Reports = () => {
       severity={rowData.role === "ROLE_ADMIN" ? "danger" : "info"}
     />
   );
+
   type FLProps = {
     label: React.ReactNode;
     value: any;
@@ -96,10 +77,9 @@ const Reports = () => {
         htmlFor={htmlFor}
         className={`position-absolute px-1 ${hasValue ? "label-float" : ""}`}
         style={{
-          top: hasValue ? "-0.5rem" : "0.5rem", // وقتی مقدار دارد لیبل بالا می‌رود
-          [isRTL ? "right" : "left"]: "0.6rem", // برای RTL و LTR
+          top: hasValue ? "-0.5rem" : "0.5rem",
+          [isRTL ? "right" : "left"]: "0.6rem",
           backgroundColor: hasValue ? "white" : "transparent",
-          // backgroundColor: "white",
           padding: "0 4px",
           transition: "0.2s ease",
           zIndex: 2,
@@ -113,141 +93,164 @@ const Reports = () => {
   };
 
   return (
-    <div className="card shadow-sm">
-      <div className="card-body">
-        {/* ================= TITLE ================= */}
-        <h5 className="mb-4" style={{ textAlign: isRTL ? "right" : "left" }}>
-          {t("reports.title")}
-        </h5>
-        {/* ================= FILTER SECTION ================= */}
-        <div className="d-flex flex-wrap justify-content-start mb-3">
-          {/* Start Date */}
-          <div className="position-relative" dir={isRTL ? "rtl" : "ltr"}>
-            <FloatingLabel
-              label={t("reports.startDate")}
-              value={startDate}
-              htmlFor="startDate"
-              isRTL={isRTL}
-            />
+    <div className="">
+      <div className="card shadow-sm">
+        <div className="card-body">
+          {/* ================= TITLE ================= */}
+          <h5 className="mb-4" style={{ textAlign: isRTL ? "right" : "left" }}>
+            {t("reports.title")}
+            <hr />
+          </h5>
+          {/* ================= FILTER SECTION ================= */}
+          <div className="row g-3 mb-4">
+            {/* Start Date */}
+            <div className="col-12 col-sm-5 col-md-4 col-lg-3 mb-2 mb-sm-0">
+              <div className="position-relative" dir={isRTL ? "rtl" : "ltr"}>
+                <FloatingLabel
+                  label={t("reports.startDate")}
+                  value={startDate}
+                  htmlFor="startDate"
+                  isRTL={isRTL}
+                />
+                <Calendar
+                  id="startDate"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.value as Date)}
+                  showIcon={true}
+                  inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
+                  style={{ width: "100%", height: "2.5rem" }}
+                  inputStyle={{
+                    paddingRight: isRTL ? undefined : "2.5rem",
+                    paddingLeft: isRTL ? "2.5rem" : undefined,
+                  }}
+                />
+                <i
+                  className={`bi ${startDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
+                  onClick={() => startDate && setStartDate(null)}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    [isRTL ? "left" : "right"]: "10px",
+                    cursor: startDate ? "pointer" : "default",
+                    fontSize: "0.9rem",
+                    zIndex: 3,
+                  }}
+                />
+              </div>
+            </div>
 
-            <Calendar
-              id="startDate"
-              value={startDate}
-              onChange={(e) => setStartDate(e.value as Date)}
-              showIcon={false}
-              inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
-              style={{ width: "100%", height: "2.5rem" }}
-              inputStyle={{
-                paddingRight: isRTL ? undefined : "2.5rem",
-                paddingLeft: isRTL ? "2.5rem" : undefined,
-              }}
-            />
+            {/* End Date */}
+            <div className="col-12 col-sm-5 col-md-4 col-lg-3 mb-2 mb-sm-0">
+              <div className="position-relative" dir={isRTL ? "rtl" : "ltr"}>
+                <FloatingLabel
+                  label={t("reports.endDate")}
+                  value={endDate}
+                  htmlFor="endDate"
+                  isRTL={isRTL}
+                />
+                <Calendar
+                  id="endDate"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.value as Date)}
+                  minDate={startDate || undefined}
+                  showIcon={true}
+                  inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
+                  style={{ width: "100%", height: "2.5rem" }}
+                  inputStyle={{
+                    paddingRight: isRTL ? undefined : "2.5rem",
+                    paddingLeft: isRTL ? "2.5rem" : undefined,
+                  }}
+                />
+                <i
+                  className={`bi ${endDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
+                  onClick={() => endDate && setEndDate(null)}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    [isRTL ? "left" : "right"]: "10px",
+                    cursor: endDate ? "pointer" : "default",
+                    fontSize: "0.9rem",
+                    zIndex: 3,
+                  }}
+                />
+              </div>
+            </div>
 
-            <i
-              className={`bi ${startDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
-              onClick={() => startDate && setStartDate(null)}
-              style={{
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)",
-                [isRTL ? "left" : "right"]: "10px",
-                cursor: startDate ? "pointer" : "default",
-                fontSize: "0.9rem",
-                zIndex: 3,
-              }}
-            />
+            {/* Search Button */}
+            <div className="col-12 col-sm-2 col-md-2 col-lg-1">
+              <Button
+                icon="pi pi-search"
+                className="p-button-primary rounded p-2 w-100"
+                onClick={handleSearch}
+                size="small"
+                style={{ height: "2.5rem" }}
+              />
+            </div>
           </div>
-          {/* End Date */}
+
+          {/* ================= STATISTICS ================= */}
           <div
-            className="position-relative"
-            dir={isRTL ? "rtl" : "ltr"}
-            style={{ minWidth: "220px" }}
+            className="row g-3 mb-3 text-md-start text-start"
+            style={{ textAlign: isRTL ? "right" : "left" }}
           >
-            <FloatingLabel
-              label={t("reports.endDate")}
-              value={endDate}
-              htmlFor="endDate"
-              isRTL={isRTL}
-            />
+            <div className="col-12 col-md-4">
+              <Card title={t("reports.totalUsers")} className="small-card">
+                <h5>{totalUsers}</h5>
+              </Card>
+            </div>
 
-            <Calendar
-              id="endDate"
-              value={endDate}
-              onChange={(e) => setEndDate(e.value as Date)}
-              minDate={startDate || undefined}
-              showIcon={false}
-              inputClassName={`form-control ${isRTL ? "text-end" : "text-start"}`}
-              style={{ width: "100%", height: "2.5rem" }}
-              inputStyle={{
-                paddingRight: isRTL ? undefined : "2.5rem",
-                paddingLeft: isRTL ? "2.5rem" : undefined,
-              }}
-            />
+            <div className="col-12 col-md-4">
+              <Card title={t("reports.adminUsers")} className="small-card">
+                <h5>{adminCount}</h5>
+              </Card>
+            </div>
 
-            <i
-              className={`bi ${endDate ? "bi-x-lg text-danger" : "bi-calendar3 text-muted"}`}
-              onClick={() => endDate && setEndDate(null)}
-              style={{
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)",
-                [isRTL ? "left" : "right"]: "10px",
-                cursor: endDate ? "pointer" : "default",
-                fontSize: "0.9rem",
-                zIndex: 3,
-              }}
-            />
-          </div>
-          {/* Search Button */}
-          <Button
-            icon="pi pi-search"
-            className="p-button-primary rounded p-2"
-            onClick={handleSearch}
-          />
-        </div>
-
-        {/* ================= STATISTICS ================= */}
-        <div
-          className="row mb-2"
-          style={{ textAlign: isRTL ? "right" : "left" }}
-        >
-          <div className="col-md-4">
-            <Card title={t("reports.totalUsers")} className="small-card">
-              <h5>{totalUsers}</h5>
-            </Card>
+            <div className="col-12 col-md-4">
+              <Card title={t("reports.normalUsers")} className="small-card">
+                <h5>{userCount}</h5>
+              </Card>
+            </div>
           </div>
 
-          <div className="col-md-4">
-            <Card title={t("reports.adminUsers")} className="small-card">
-              <h5>{adminCount}</h5>
-            </Card>
-          </div>
-
-          <div className="col-md-4">
-            <Card title={t("reports.normalUsers")} className="small-card">
-              <h5>{userCount}</h5>
-            </Card>
+          {/* ================= DATA TABLE ================= */}
+          <div className="mt-4">
+            <div className="table-responsive">
+              <DataTable
+                value={filteredUsers}
+                paginator
+                rows={5}
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                responsiveLayout="scroll"
+                className="p-datatable-sm"
+              >
+                <Column
+                  field="firstName"
+                  header={t("users.firstName")}
+                  sortable
+                />
+                <Column
+                  field="lastName"
+                  header={t("users.lastName")}
+                  sortable
+                />
+                <Column field="email" header={t("users.email")} sortable />
+                <Column
+                  field="username"
+                  header={t("users.username")}
+                  sortable
+                />
+                <Column
+                  field="role"
+                  header={t("users.role")}
+                  body={roleBody}
+                  sortable
+                />
+              </DataTable>
+            </div>
           </div>
         </div>
-
-        {/* ================= DATA TABLE ================= */}
-        <DataTable
-          value={filteredUsers}
-          paginator
-          rows={5}
-          responsiveLayout="scroll"
-        >
-          <Column field="firstName" header={t("users.firstName")} sortable />
-          <Column field="lastName" header={t("users.lastName")} sortable />
-          <Column field="email" header={t("users.email")} sortable />
-          <Column field="username" header={t("users.username")} sortable />
-          <Column
-            field="role"
-            header={t("users.role")}
-            body={roleBody}
-            sortable
-          />
-        </DataTable>
       </div>
     </div>
   );
