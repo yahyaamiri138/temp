@@ -68,6 +68,7 @@ import { useSelector } from "react-redux";
 import { Dropdown } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import type { RootState } from "../app/stores";
+import "../CSS/Topbar.css";
 
 interface SettingOption {
   label: string;
@@ -89,9 +90,9 @@ const Topbar = () => {
 
   // Dynamic options based on translation
   const options: SettingOption[] = [
-    { label: t("topbar.profile"), value: "profile" },
-    { label: t("topbar.english"), value: "en" },
-    { label: t("topbar.farsi"), value: "fa" },
+    // { label: t("topbar.profile"), value: "profile" },
+    { label: t("topbar.en"), value: "en" },
+    { label: t("topbar.fa"), value: "fa" },
   ];
 
   const handleSettingChange = (e: any) => {
@@ -106,7 +107,7 @@ const Topbar = () => {
   };
 
   return (
-    <div className="border-bottom bg-light">
+    <div className="border-bottom bg-light topbar">
       <nav className="navbar navbar-expand">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {/* Username */}
@@ -119,8 +120,8 @@ const Topbar = () => {
             value={selectedSetting}
             options={options}
             onChange={handleSettingChange}
-            placeholder={t("topbar.settings")}
-            className="form-select form-select-sm"
+            placeholder={t("topbar.lang")}
+            appendTo={document.body}
           />
         </div>
       </nav>

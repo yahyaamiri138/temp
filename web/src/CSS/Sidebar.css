@@ -1,9 +1,8 @@
 /* ===== Sidebar Main ===== */
-
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  inset-inline-start: 0; /* RTL و LTR را خودکار تنظیم می‌کند */
   width: 250px;
   height: 100vh;
   background-color: #2a3142;
@@ -118,12 +117,14 @@
   padding: 1rem;
   display: flex;
   align-items: center;
-  z-index: 1030;
+  justify-content: space-between;
+  z-index: 1100;
 }
 
 .header-title {
   color: white;
   margin: 0;
+  font-size: 1rem;
 }
 
 .menu-btn {
@@ -153,10 +154,21 @@
 }
 
 /* ===== RTL Support ===== */
-
+/* Desktop */
 html[dir="rtl"] .sidebar {
   left: auto;
   right: 0;
+}
+
+/* Mobile only */
+@media (max-width: 991px) {
+  html[dir="rtl"] .sidebar {
+    transform: translateX(100%);
+  }
+
+  html[dir="rtl"] .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
 }
 
 html[dir="rtl"] .sidebar-menu a {

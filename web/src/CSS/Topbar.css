@@ -1,0 +1,10 @@
+.topbar {
+  position: relative;
+  z-index: 1000;
+}
+
+@media (max-width: 991px) {
+  .topbar {
+    margin-top: 15%;
+  }
+}
