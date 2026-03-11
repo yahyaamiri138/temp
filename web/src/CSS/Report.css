@@ -29,3 +29,21 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+/* DateFilter */
+.date-clear-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 0.9rem;
+  z-index: 3;
+}
+
+[dir="ltr"] .date-clear-icon {
+  right: 55px;
+}
+
+[dir="rtl"] .date-clear-icon {
+  left: 55px;
+}
