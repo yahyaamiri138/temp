@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const AdminLayout = () => {
   const { i18n } = useTranslation();
-  const isRTL = i18n.language === "fa";
+  // const isRTL = i18n.language === "fa";
 
   useEffect(() => {
     const dir = i18n.language === "fa" ? "rtl" : "ltr";

@@ -25,10 +25,10 @@
   },
 
   "topbar": {
-    "settings": "Settings",
+    "lang": "lang",
     "profile": "Profile",
-    "english": "English",
-    "farsi": "Dari"
+    "en": "English",
+    "fa": "Farsi"
   },
 
   "users": {

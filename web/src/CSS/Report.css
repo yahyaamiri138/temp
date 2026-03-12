@@ -29,3 +29,65 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+/* DateFilter */
+.date-clear-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 0.9rem;
+  z-index: 3;
+}
+
+[dir="ltr"] .date-clear-icon {
+  right: 55px;
+}
+
+[dir="rtl"] .date-clear-icon {
+  left: 55px;
+}
+
+/* DATATABLE  */
+/* Reports.css - استایل‌های مربوط به کامپوننت Reports */
+
+/* استایل‌های مربوط به راست‌چین بودن جدول */
+[dir="rtl"] .p-datatable .p-datatable-thead > tr > th,
+[dir="rtl"] .p-datatable .p-datatable-tbody > tr > td {
+  text-align: right !important;
+}
+
+[dir="rtl"] .p-datatable .p-sortable-column .p-column-title {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .p-datatable .p-sortable-column .p-sortable-column-icon {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* استایل‌های مربوط به paginator در حالت راست‌چین */
+[dir="rtl"] .p-paginator .p-paginator-pages .p-paginator-page {
+  margin: 0 0.1rem;
+}
+
+[dir="rtl"] .p-paginator .p-paginator-first,
+[dir="rtl"] .p-paginator .p-paginator-prev,
+[dir="rtl"] .p-paginator .p-paginator-next,
+[dir="rtl"] .p-paginator .p-paginator-last {
+  transform: rotate(180deg);
+}
+
+/* استایل‌های مربوط به کارت‌ها در حالت راست‌چین */
+[dir="rtl"] .small-card .p-card-title {
+  text-align: right;
+}
+
+[dir="rtl"] .small-card .p-card-content {
+  text-align: right;
+}
+
+[dir="rtl"] .small-card h5 {
+  text-align: right;
+}
