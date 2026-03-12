@@ -1,0 +1,33 @@
+/* UserList.css - استایل‌های مربوط به کامپوننت UserList */
+
+/* استایل‌های مربوط به راست‌چین بودن جدول */
+.p-datatable[dir="rtl"] .p-datatable-thead > tr > th,
+.p-datatable[dir="rtl"] .p-datatable-tbody > tr > td {
+  text-align: right !important;
+}
+
+.p-datatable[dir="rtl"] .p-datatable-tbody > tr > td:last-child {
+  text-align: left !important;
+}
+
+.p-datatable[dir="rtl"] .p-sortable-column .p-column-title {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.p-datatable[dir="rtl"] .p-sortable-column .p-sortable-column-icon {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* استایل‌های اضافی برای paginator در حالت راست‌چین */
+.p-paginator[dir="rtl"] .p-paginator-pages .p-paginator-page {
+  margin: 0 0.1rem;
+}
+
+.p-paginator[dir="rtl"] .p-paginator-first,
+.p-paginator[dir="rtl"] .p-paginator-prev,
+.p-paginator[dir="rtl"] .p-paginator-next,
+.p-paginator[dir="rtl"] .p-paginator-last {
+  transform: rotate(180deg);
+}
