@@ -68,6 +68,7 @@ import { useSelector } from "react-redux";
 import { Dropdown } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import type { RootState } from "../app/stores";
+import "../CSS/Sidebar.css";
 
 interface SettingOption {
   label: string;
@@ -94,6 +95,16 @@ const Topbar = () => {
     { label: t("topbar.farsi"), value: "fa" },
   ];
 
+  // const handleSettingChange = (e: any) => {
+  //   const value = e.value;
+  //   setSelectedSetting(value);
+
+  //   if (value === "profile") {
+  //     console.log("Profile clicked");
+  //   } else if (value === "en" || value === "fa") {
+  //     i18n.changeLanguage(value);
+  //   }
+  // };
   const handleSettingChange = (e: any) => {
     const value = e.value;
     setSelectedSetting(value);
@@ -102,11 +113,12 @@ const Topbar = () => {
       console.log("Profile clicked");
     } else if (value === "en" || value === "fa") {
       i18n.changeLanguage(value);
+      document.documentElement.dir = value === "fa" ? "rtl" : "ltr";
     }
   };
 
   return (
-    <div className="border-bottom bg-light">
+    <div className="topbar border-bottom bg-light">
       <nav className="navbar navbar-expand">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {/* Username */}
