@@ -178,3 +178,9 @@ html[dir="rtl"] .sidebar-menu a {
 html[dir="rtl"] .logout-btn {
   text-align: right;
 }
+
+/* Topbar  */
+.topbar {
+  position: relative;
+  z-index: 1100;
+}

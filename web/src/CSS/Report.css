@@ -13,7 +13,6 @@
 
 /* Dates */
 /* استفاده از کلاس‌های Bootstrap radius */
-
 /* LTR */
 [dir="ltr"] .p-datepicker-trigger {
   border-top-right-radius: 0.375rem;
@@ -40,12 +39,27 @@
   z-index: 3;
 }
 
-[dir="ltr"] .date-clear-icon {
-  right: 55px;
+/* ===== Date Input Fix ===== */
+/* LTR */
+[dir="ltr"] .p-calendar .p-inputtext {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-[dir="rtl"] .date-clear-icon {
-  left: 55px;
+[dir="ltr"] .p-calendar .p-datepicker-trigger {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* RTL */
+[dir="rtl"] .p-calendar .p-inputtext {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+[dir="rtl"] .p-calendar .p-datepicker-trigger {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* DATATABLE  */
