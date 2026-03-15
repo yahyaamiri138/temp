@@ -39,6 +39,14 @@
   z-index: 3;
 }
 
+[dir="ltr"] .date-clear-icon {
+  right: 55px;
+}
+
+[dir="rtl"] .date-clear-icon {
+  left: 55px;
+}
+
 /* ===== Date Input Fix ===== */
 /* LTR */
 [dir="ltr"] .p-calendar .p-inputtext {

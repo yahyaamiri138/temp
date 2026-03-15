@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Dropdown } from "primereact/dropdown";
+import { Dropdown, type DropdownChangeEvent } from "primereact/dropdown";
 import { useTranslation } from "react-i18next";
 import type { RootState } from "../app/stores";
 import "../CSS/Topbar.css";
@@ -25,35 +25,20 @@ const Topbar = () => {
 
   // Dynamic options based on translation
   const options: SettingOption[] = [
-    // { label: t("topbar.profile"), value: "profile" },
     { label: t("topbar.en"), value: "en" },
     { label: t("topbar.fa"), value: "fa" },
   ];
 
-  // const handleSettingChange = (e: any) => {
-  //   const value = e.value;
-  //   setSelectedSetting(value);
-
-  //   if (value === "profile") {
-  //     console.log("Profile clicked");
-  //   } else if (value === "en" || value === "fa") {
-  //     i18n.changeLanguage(value);
-  //   }
-  // };
-  const handleSettingChange = (e: any) => {
-    const value = e.value;
-    setSelectedSetting(value);
-
-    if (value === "profile") {
-      console.log("Profile clicked");
-    } else if (value === "en" || value === "fa") {
-      i18n.changeLanguage(value);
-      document.documentElement.dir = value === "fa" ? "rtl" : "ltr";
-    }
+  const handleSettingChange = (e: DropdownChangeEvent) => {
+    const lang = e.value as string;
+    setSelectedSetting(lang);
+    i18n.changeLanguage(lang);
+    const rtlLanguages = ["fa", "ar", "ps"];
+    document.documentElement.dir = rtlLanguages.includes(lang) ? "rtl" : "ltr";
   };
 
   return (
-    <div className="border-bottom bg-light">
+    <div className="topbar border-bottom bg-light">
       <nav className="navbar navbar-expand">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {/* Username */}
