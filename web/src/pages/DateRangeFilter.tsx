@@ -113,10 +113,10 @@ const DateRangeFilter = ({
       </div>
 
       {/* Search */}
-      <div className="col-12 col-sm-2 col-md-2 col-lg-1 mb-2 mb-sm-0">
+      <div className="col-12 col-sm-2 col-md-2 col-lg-1 d-flex justify-content-start align-items-start mb-2 mb-sm-0">
         <Button
           icon="pi pi-search"
-          className="p-button-primary rounded p-2 w-100"
+          className="p-button-primary rounded p-2"
           onClick={onSearch}
           size="small"
           style={{ height: "2.5rem" }}
