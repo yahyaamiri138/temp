@@ -7,8 +7,8 @@ import { Tag } from "primereact/tag";
 import { useTranslation } from "react-i18next";
 import type { AppDispatch, RootState } from "../app/stores";
 import { fetchUsers } from "../features/users/userSlice";
-import "../CSS/Report.css";
 import DateRangeFilter from "./DateRangeFilter";
+import "../CSS/Report.css";
 
 const Reports = () => {
   const { t, i18n } = useTranslation();

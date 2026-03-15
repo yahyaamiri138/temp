@@ -44,7 +44,7 @@ const RegisterForm = () => {
       <UserForm
         visible={visible}
         onHide={() => navigate("/auth")}
-        onSubmit={(user) => handleRegister(user)}
+        onSubmit={(user: any) => handleRegister(user)}
         initialData={{
           username: "",
           password: "",

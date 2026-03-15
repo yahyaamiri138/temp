@@ -63,8 +63,6 @@
 }
 
 /* DATATABLE  */
-/* Reports.css - استایل‌های مربوط به کامپوننت Reports */
-
 /* استایل‌های مربوط به راست‌چین بودن جدول */
 [dir="rtl"] .p-datatable .p-datatable-thead > tr > th,
 [dir="rtl"] .p-datatable .p-datatable-tbody > tr > td {
