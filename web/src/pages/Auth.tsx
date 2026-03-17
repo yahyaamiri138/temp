@@ -16,6 +16,8 @@ const Auth: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const { loading, error } = useSelector((state: RootState) => state.auth);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -49,23 +51,27 @@ const Auth: React.FC = () => {
       if (login.fulfilled.match(result)) {
         navigate("/dashboard");
       } else {
-        setLocalError("Invalid username or password");
+        setLocalError(t("auth.invalidCredentials"));
       }
     } catch {
       setLocalError("Something went wrong. Try again.");
+      setLocalError(t("auth.somethingWrong"));
     }
   };
 
   //Translation and RTL support
   const { i18n } = useTranslation();
   useEffect(() => {
-    const isRTL = i18n.language === "fa";
+    const isRTL = i18n.language.startsWith("fa");
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
   return (
-    <div className="auth-container">
+    <div
+      className="auth-container"
+      dir={i18n.language.startsWith("fa") ? "rtl" : "ltr"}
+    >
       <div className="auth-card">
         {/* LEFT SIDE */}
         <div className="auth-left">
@@ -74,8 +80,8 @@ const Auth: React.FC = () => {
 
         {/* RIGHT SIDE */}
         <div className="auth-right">
-          <h3 className="auth-title">Login</h3>
-
+          {/* <h3 className="auth-title">Login</h3> */}
+          <h3 className="auth-title">{t("auth.login")}</h3>
           <form onSubmit={handleSubmit}>
             {/* Username */}
             <div className="input-group">
@@ -83,7 +89,7 @@ const Auth: React.FC = () => {
               <input
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder={t("auth.username")}
                 value={form.username}
                 onChange={handleChange}
                 required
@@ -96,7 +102,7 @@ const Auth: React.FC = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password"
+                placeholder={t("auth.password")}
                 value={form.password}
                 onChange={handleChange}
                 required
@@ -116,13 +122,17 @@ const Auth: React.FC = () => {
             )}
 
             <button type="submit" disabled={loading} className="login-btn">
-              {loading ? "Signing in..." : "Login"}
+              {loading
+                ? t("common.loading") || "Signing in..."
+                : t("auth.login")}
             </button>
           </form>
 
           <p className="signup-text">
-            Not a member yet?{" "}
-            <span onClick={() => navigate("/register")}>Sign up</span>
+            {t("auth.notMember")}{" "}
+            <span onClick={() => navigate("/register")}>
+              {t("auth.signup")}
+            </span>
           </p>
         </div>
       </div>

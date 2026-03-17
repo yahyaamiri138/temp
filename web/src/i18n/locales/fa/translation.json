@@ -3,13 +3,18 @@
     "save": "ذخیره",
     "cancel": "لغو",
     "search": "جستجو",
-    "language": "زبان"
+    "language": "زبان",
+    "loading": "در حال ورود..."
   },
 
   "auth": {
     "login": "ورود",
     "username": "نام کاربری",
-    "password": "رمز عبور"
+    "password": "رمز عبور",
+    "invalidCredentials": "نام کاربری یا رمز عبور نادرست است",
+    "somethingWrong": "مشکلی رخ داده است. دوباره تلاش کنید",
+    "notMember": "حساب کاربری ندارید؟",
+    "signup": "ثبت‌نام"
   },
 
   "dashboard": {

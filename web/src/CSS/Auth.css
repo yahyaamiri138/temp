@@ -122,3 +122,37 @@
     display: none;
   }
 }
+
+/* ================= RTL SUPPORT ================= */
+
+[dir="rtl"] .auth-right {
+  text-align: right;
+}
+
+[dir="rtl"] .input-group input {
+  padding-right: 40px;
+  padding-left: 40px; /* برای toggle */
+}
+
+/* icon سمت راست برود */
+[dir="rtl"] .input-icon {
+  left: auto;
+  right: 12px;
+}
+
+/* toggle بیاید سمت چپ */
+[dir="rtl"] .toggle-icon {
+  right: auto;
+  left: 12px;
+}
+
+/* متن‌ها */
+[dir="rtl"] .auth-title,
+[dir="rtl"] .signup-text,
+[dir="rtl"] .error-text {
+  text-align: right;
+}
+
+.auth-card {
+  direction: inherit;
+}

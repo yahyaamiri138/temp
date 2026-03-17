@@ -3,13 +3,18 @@
     "save": "Save",
     "cancel": "Cancel",
     "search": "Search",
-    "language": "Language"
+    "language": "Language",
+    "loading": "Signing in..."
   },
 
   "auth": {
     "login": "Login",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "invalidCredentials": "Invalid username or password",
+    "somethingWrong": "Something went wrong. Try again.",
+    "notMember": "Not a member yet?",
+    "signup": "Sign up"
   },
 
   "dashboard": {
