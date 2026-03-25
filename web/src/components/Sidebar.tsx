@@ -52,6 +52,40 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebar-menu">
+            {/* <ul>
+              <li>
+                <Link
+                  to="/dashboard"
+                  className={location.pathname === "/dashboard" ? "active" : ""}
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-view-dashboard mr-2 ml-2" />
+                  {t("sidebar.dashboard")}
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/users"
+                  className={location.pathname === "/users" ? "active" : ""}
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-account mr-2 ml-2" />
+                  {t("sidebar.users")}
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/reports"
+                  className={location.pathname === "/reports" ? "active" : ""}
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-poll mr-2 ml-2" />
+                  {t("sidebar.reports")}
+                </Link>
+              </li>
+            </ul> */}
             <ul>
               <li>
                 <Link
@@ -72,6 +106,32 @@ const Sidebar = () => {
                 >
                   <i className="mdi mdi-account mr-2 ml-2" />
                   {t("sidebar.users")}
+                </Link>
+              </li>
+
+              {/* ✅ PRODUCTS */}
+              <li>
+                <Link
+                  to="/products"
+                  className={location.pathname === "/products" ? "active" : ""}
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-cube-outline mr-2 ml-2" />
+                  {t("sidebar.products")}
+                </Link>
+              </li>
+
+              {/* ✅ CATEGORIES */}
+              <li>
+                <Link
+                  to="/categories"
+                  className={
+                    location.pathname === "/categories" ? "active" : ""
+                  }
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-format-list-bulleted mr-2 ml-2" />
+                  {t("sidebar.categories")}
                 </Link>
               </li>
 

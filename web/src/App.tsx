@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import UserList from "./pages/UserList";
 import RegisterForm from "./pages/RegisterForm";
 import Reports from "./pages/Report";
+import CategoryList from "./pages/CategoryList";
+import ProductList from "./pages/ProductList";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="users" element={<UserList />} />
         <Route path="reports" element={<Reports />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/categories" element={<CategoryList />} />
         {/* Add more protected routes here */}
       </Route>
     </Routes>

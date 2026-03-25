@@ -22,11 +22,13 @@
   },
 
   "sidebar": {
-    "adminPanel": "Admin Panel",
     "dashboard": "Dashboard",
     "users": "Users",
+    "products": "Products",
+    "categories": "Categories",
     "reports": "Reports",
-    "logout": "Logout"
+    "logout": "Logout",
+    "adminPanel": "Admin Panel"
   },
 
   "topbar": {
@@ -88,5 +90,18 @@
     "endDate": "End Date",
     "search": "Search",
     "reset": "Reset"
+  },
+  "category": {
+    "title": "Category",
+    "id": "Id",
+    "name": "Name"
+  },
+  "product": {
+    "title": "Product",
+    "id": "Id",
+    "name": "Name",
+    "type": "Type",
+    "size": "Size",
+    "description": "Description"
   }
 }
