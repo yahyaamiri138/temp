@@ -1,5 +1,6 @@
 package mcit.af.backend_temp.controller;
 
+import mcit.af.backend_temp.dto.CategoryResponse;
 import mcit.af.backend_temp.entity.Category;
 import mcit.af.backend_temp.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +19,23 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<Category> getAll() {
-        return service.getAll();
+    public List<CategoryResponse> getAll() {
+        return service.getAllCategories();
     }
 
     @PostMapping
-    public Category create(@RequestBody Category category) {
-        return service.create(category);
+    public CategoryResponse create(@RequestBody Category category) {
+        return service.createCategory(category);
     }
 
     @PutMapping("/{id}")
-    public Category update(@PathVariable Long id,
-                           @RequestBody Category category) {
-        return service.update(id, category);
+    public CategoryResponse update(@PathVariable Long id,
+                                   @RequestBody Category category) {
+        return service.updateCategory(id, category);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        service.delete(id);
+        service.deleteCategory(id);
     }
 }

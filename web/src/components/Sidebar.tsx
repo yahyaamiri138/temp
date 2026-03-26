@@ -109,18 +109,6 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              {/* ✅ PRODUCTS */}
-              <li>
-                <Link
-                  to="/products"
-                  className={location.pathname === "/products" ? "active" : ""}
-                  onClick={closeSidebar}
-                >
-                  <i className="mdi mdi-cube-outline mr-2 ml-2" />
-                  {t("sidebar.products")}
-                </Link>
-              </li>
-
               {/* ✅ CATEGORIES */}
               <li>
                 <Link
@@ -132,6 +120,18 @@ const Sidebar = () => {
                 >
                   <i className="mdi mdi-format-list-bulleted mr-2 ml-2" />
                   {t("sidebar.categories")}
+                </Link>
+              </li>
+
+              {/* ✅ PRODUCTS */}
+              <li>
+                <Link
+                  to="/products"
+                  className={location.pathname === "/products" ? "active" : ""}
+                  onClick={closeSidebar}
+                >
+                  <i className="mdi mdi-cube-outline mr-2 ml-2" />
+                  {t("sidebar.products")}
                 </Link>
               </li>
 

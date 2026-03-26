@@ -153,7 +153,7 @@ const ProductList = () => {
         <div className="d-flex justify-content-between mb-3">
           <h5>{t("products.title")}</h5>
           <Button
-            label={t("products.addProduct")}
+            label={t("products.add")}
             icon="pi pi-plus"
             className="btn btn-sm p-button-primary rounded"
             onClick={handleAdd}
@@ -171,7 +171,7 @@ const ProductList = () => {
           <Column field="size" header={t("products.size")} sortable />
           <Column
             field="categoryName"
-            header={t("products.category")}
+            header={t("products.categoryName")}
             sortable
           />
 

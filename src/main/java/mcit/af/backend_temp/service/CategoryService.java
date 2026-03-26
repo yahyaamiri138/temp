@@ -1,40 +1,68 @@
 package mcit.af.backend_temp.service;
 
+import mcit.af.backend_temp.dto.CategoryResponse;
 import mcit.af.backend_temp.entity.Category;
 import mcit.af.backend_temp.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    // ✅ Constructor Injection (better than @Autowired)
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> getAll() {
-        return categoryRepository.findAll();
+    // ✅ GET ALL
+    public List<CategoryResponse> getAllCategories() {
+        return categoryRepository.findAll()
+                .stream()
+                .map(this::convertToResponse)
+                .collect(Collectors.toList());
     }
 
-    public Category getById(Long id) {
+    // ✅ GET BY ID
+    public CategoryResponse getCategoryById(Long id) {
         return categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .map(this::convertToResponse)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
     }
 
-    public Category create(Category category) {
-        return categoryRepository.save(category);
+    // ✅ CREATE
+    public CategoryResponse createCategory(Category category) {
+        Category saved = categoryRepository.save(category);
+        return convertToResponse(saved);
     }
 
-    public Category update(Long id, Category category) {
-        Category existing = getById(id);
+    // ✅ UPDATE
+    public CategoryResponse updateCategory(Long id, Category category) {
+        Category existing = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+
         existing.setName(category.getName());
-        return categoryRepository.save(existing);
+
+        Category updated = categoryRepository.save(existing);
+        return convertToResponse(updated);
     }
 
-    public void delete(Long id) {
+    // ✅ DELETE
+    public void deleteCategory(Long id) {
+        if (!categoryRepository.existsById(id)) {
+            throw new RuntimeException("Category not found with id: " + id);
+        }
         categoryRepository.deleteById(id);
+    }
+
+    // ✅ MAPPER (Entity → DTO)
+    private CategoryResponse convertToResponse(Category category) {
+        CategoryResponse response = new CategoryResponse();
+        response.setId(category.getId());
+        response.setName(category.getName());
+        return response;
     }
 }

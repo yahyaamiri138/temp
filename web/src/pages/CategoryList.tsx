@@ -14,11 +14,12 @@ import {
   fetchCategories,
   updateCategory,
 } from "../features/category/categorySlice";
+import { useTranslation } from "react-i18next";
 
 const CategoryList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { list } = useSelector((state: RootState) => state.category);
-
+  const { t, i18n } = useTranslation();
   const toast = useRef<Toast>(null);
 
   const [formVisible, setFormVisible] = useState(false);
@@ -93,13 +94,18 @@ const CategoryList = () => {
 
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
-          <h5>Categories</h5>
-          <Button label="Add" icon="pi pi-plus" onClick={handleAdd} />
+          <h5>{t("categories.title")}</h5>
+          <Button
+            label={t("categories.add")}
+            icon="pi pi-plus"
+            className="btn btn-sm p-button-primary rounded"
+            onClick={handleAdd}
+          />
         </div>
 
         <DataTable value={list} paginator rows={5}>
-          <Column field="name" header="Name" />
-          <Column header="Actions" body={actionBody} />
+          <Column field="name" header={t("categories.name")} />
+          <Column header={t("categories.actions")} body={actionBody} />
         </DataTable>
       </div>
 

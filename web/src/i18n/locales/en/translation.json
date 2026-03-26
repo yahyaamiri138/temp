@@ -91,17 +91,26 @@
     "search": "Search",
     "reset": "Reset"
   },
-  "category": {
+  "categories": {
     "title": "Category",
     "id": "Id",
-    "name": "Name"
+    "name": "Name",
+    "actions": "Actions",
+    "add": "Add Category",
+    "edit": "Edit",
+    "delete": "Delete"
   },
-  "product": {
+  "products": {
     "title": "Product",
     "id": "Id",
     "name": "Name",
     "type": "Type",
     "size": "Size",
-    "description": "Description"
+    "description": "Description",
+    "categoryName": "Category",
+    "actions": "Actions",
+    "add": "Add Product",
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

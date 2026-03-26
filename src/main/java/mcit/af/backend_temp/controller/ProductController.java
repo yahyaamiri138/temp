@@ -1,40 +1,33 @@
 package mcit.af.backend_temp.controller;
 
-import mcit.af.backend_temp.entity.Product;
+import mcit.af.backend_temp.dto.ProductRequest;
+import mcit.af.backend_temp.dto.ProductResponse;
 import mcit.af.backend_temp.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin
 public class ProductController {
-
-    private final ProductService service;
-
-    public ProductController(ProductService service) {
-        this.service = service;
-    }
-
+    
+    @Autowired
+    private ProductService productService;
+    
     @GetMapping
-    public List<ProductResponse> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
-
+    
     @PostMapping
-    public Product create(@RequestBody ProductRequest request) {
-        return service.create(request.toProduct(), request.getCategoryId());
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+        return ResponseEntity.ok(productService.createProduct(request));
     }
-
+    
     @PutMapping("/{id}")
-    public Product update(@PathVariable Long id,
-                          @RequestBody ProductRequest request) {
-        return service.update(id, request.toProduct(), request.getCategoryId());
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @RequestBody ProductRequest request) {
+        return ResponseEntity.ok(productService.updateProduct(id, request));
     }
 }
