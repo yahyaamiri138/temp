@@ -125,7 +125,7 @@ const UserForm = ({
 
         <div className="col-md-6 mt-4">
           <Button
-            label={isEditMode ? t("users.updated") : t("users.created")}
+            label={isEditMode ? t("users.update") : t("users.create")}
             icon="pi pi-check"
             onClick={() => onSubmit(user, isEditMode)}
             className="w-100"
