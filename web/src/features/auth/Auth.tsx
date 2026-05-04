@@ -15,11 +15,8 @@ interface LoginFormState {
 const Auth: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
   const { t } = useTranslation();
-
   const { loading, error } = useSelector((state: RootState) => state.auth);
-
   const [showPassword, setShowPassword] = useState(false);
 
   const [form, setForm] = useState<LoginFormState>({
@@ -39,7 +36,6 @@ const Auth: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalError("");
-
     try {
       const result = await dispatch(
         login({
@@ -47,7 +43,6 @@ const Auth: React.FC = () => {
           password: form.password,
         }),
       );
-
       if (login.fulfilled.match(result)) {
         navigate("/dashboard");
       } else {
