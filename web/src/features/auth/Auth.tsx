@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import type { AppDispatch, RootState } from "../app/stores";
-import "../CSS/Auth.css";
-import MCITLogo from "../assets/MCITLogo.png";
+import type { AppDispatch, RootState } from "../../app/stores";
+import MCITLogo from "../../assets/MCITLogo.png";
+import "../../CSS/Auth.css";
 import { useTranslation } from "react-i18next";
+import { login } from "./authSlice";
 
 interface LoginFormState {
   username: string;

@@ -8,7 +8,7 @@ import { Toast } from "primereact/toast";
 import { Card } from "primereact/card";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
-import type { AppDispatch, RootState } from "../app/stores";
+import type { AppDispatch, RootState } from "../../app/stores";
 import ProductForm from "./ProductForm";
 import { useTranslation } from "react-i18next";
 import {
@@ -16,8 +16,8 @@ import {
   deleteProduct,
   fetchProducts,
   updateProduct,
-} from "../features/product/productSlice";
-import { fetchCategories } from "../features/category/categorySlice";
+} from "./productSlice";
+import { fetchCategories } from "../category/categorySlice";
 
 const ProductList = () => {
   const dispatch = useDispatch<AppDispatch>();

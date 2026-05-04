@@ -8,18 +8,11 @@ import { Toast } from "primereact/toast";
 import { Card } from "primereact/card";
 import { Tag } from "primereact/tag";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-
-import {
-  fetchUsers,
-  deleteUser,
-  updateUser,
-  createUser,
-} from "../features/users/userSlice";
-
-import type { AppDispatch, RootState } from "../app/stores";
-import UserForm from "./UserForm";
+import type { AppDispatch, RootState } from "../../app/stores";
 import { useTranslation } from "react-i18next";
-import "../CSS/UserList.css";
+import { createUser, deleteUser, fetchUsers, updateUser } from "./userSlice";
+import "../../CSS/UserList.css";
+import UserForm from "./UserForm";
 
 // Helper to get user role from JWT token
 const getUserRole = (): string | null => {

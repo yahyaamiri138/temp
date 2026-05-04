@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { fetchDebts } from "../features/debt/debtSlice";
+import { fetchDebts } from "./debtSlice";
+import type { AppDispatch } from "../../app/stores";
 
 const DebtList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { list } = useSelector((state: any) => state.debt);
 
   useEffect(() => {

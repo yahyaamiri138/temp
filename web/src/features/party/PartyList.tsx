@@ -9,9 +9,9 @@ import {
   deleteParty,
   createParty,
   updateParty,
-} from "../features/party/partySlice";
+} from "./partySlice";
 
-import type { RootState, AppDispatch } from "../app/stores";
+import type { RootState, AppDispatch } from "../../app/stores";
 import PartyForm from "./PartyForm";
 
 const PartyList = () => {

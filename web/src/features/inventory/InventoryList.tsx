@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { fetchInventory } from "../features/inventory/inventorySlice";
+import { fetchInventory } from "./inventorySlice";
+import type { AppDispatch } from "../../app/stores";
 
 const InventoryList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { list } = useSelector((state: any) => state.inventory);
 
   useEffect(() => {

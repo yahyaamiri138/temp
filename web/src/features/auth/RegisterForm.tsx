@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../features/users/userSlice";
-import type { AppDispatch } from "../app/stores";
-import UserForm from "./UserForm";
+import { createUser } from "../users/userSlice";
+import type { AppDispatch } from "../../app/stores";
+import UserForm from "../users/UserForm";
 import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 

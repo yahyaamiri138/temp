@@ -7,13 +7,13 @@ import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import CategoryForm from "./CategoryForm";
-import type { RootState, AppDispatch } from "../app/stores";
+import type { RootState, AppDispatch } from "../../app/stores";
 import {
   createCategory,
   deleteCategory,
   fetchCategories,
   updateCategory,
-} from "../features/category/categorySlice";
+} from "./categorySlice";
 import { useTranslation } from "react-i18next";
 
 const CategoryList = () => {

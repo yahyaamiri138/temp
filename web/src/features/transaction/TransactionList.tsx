@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-import {
-  fetchTransactions,
-  createTransaction,
-} from "../features/transaction/transactionSlice";
+import { fetchTransactions, createTransaction } from "./transactionSlice";
 import TransactionForm from "./TransactionForm";
+import type { AppDispatch } from "../../app/stores";
 
 const TransactionList = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch<AppDispatch>();
   const { list } = useSelector((state: any) => state.transaction);
 
   const [formVisible, setFormVisible] = useState(false);
