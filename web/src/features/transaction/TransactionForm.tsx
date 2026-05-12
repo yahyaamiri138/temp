@@ -22,12 +22,11 @@ const TransactionForm = ({
   // ➕ اضافه کردن آیتم
   const addItem = () => {
     if (!selectedProduct) return;
-
     const newItem = {
       productId: selectedProduct.id,
+      productName: selectedProduct.name,
       quantity,
     };
-
     setTransaction({
       ...transaction,
       items: [...transaction.items, newItem],

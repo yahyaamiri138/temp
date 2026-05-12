@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Dialog } from "primereact/dialog";
-import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
+import { InputNumber } from "primereact/inputnumber";
 
 const DebtForm = ({
   visible,
@@ -22,9 +22,9 @@ const DebtForm = ({
     <Dialog header="Debt Form" visible={visible} onHide={onHide}>
       <div className="mb-3">
         <label>Amount</label>
-        <InputText
+        <InputNumber
           value={debt?.amount || ""}
-          onChange={(e) => setDebt({ ...debt, amount: e.target.value })}
+          onValueChange={(e) => setDebt({ ...debt, amount: e.value })}
         />
       </div>
 

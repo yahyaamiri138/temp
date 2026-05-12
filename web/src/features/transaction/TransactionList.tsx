@@ -5,17 +5,27 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { fetchTransactions, createTransaction } from "./transactionSlice";
 import TransactionForm from "./TransactionForm";
-import type { AppDispatch } from "../../app/stores";
+import type { AppDispatch, RootState } from "../../app/stores";
+import { fetchProducts } from "../product/productSlice";
+import { fetchParties } from "../party/partySlice";
 
 const TransactionList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { list } = useSelector((state: any) => state.transaction);
 
+  const { list: parties } = useSelector((state: RootState) => state.party);
+  const { products } = useSelector((state: RootState) => state.products);
+
   const [formVisible, setFormVisible] = useState(false);
 
+  // useEffect(() => {
+  //   dispatch(fetchTransactions());
+  // }, []);
   useEffect(() => {
     dispatch(fetchTransactions());
-  }, []);
+    dispatch(fetchParties());
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const handleSubmit = async (data: any) => {
     await dispatch(createTransaction(data));
@@ -47,8 +57,8 @@ const TransactionList = () => {
           visible={formVisible}
           onHide={() => setFormVisible(false)}
           onSubmit={handleSubmit}
-          parties={[]} // بعداً وصل می‌کنیم
-          products={[]} // بعداً وصل می‌کنیم
+          parties={parties}
+          products={products}
         />
       </div>
     </div>
