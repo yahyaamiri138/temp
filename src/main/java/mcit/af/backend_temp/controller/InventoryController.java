@@ -1,23 +1,44 @@
 package mcit.af.backend_temp.controller;
 
+import lombok.RequiredArgsConstructor;
 import mcit.af.backend_temp.entity.Inventory;
 import mcit.af.backend_temp.service.InventoryService;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventory")
+@RequiredArgsConstructor
 public class InventoryController {
 
     private final InventoryService service;
 
-    public InventoryController(InventoryService service) {
-        this.service = service;
-    }
-
+    // ================= GET ALL =================
     @GetMapping
     public List<Inventory> getAll() {
         return service.getAll();
+    }
+
+    // ================= CREATE =================
+    @PostMapping
+    public Inventory create(@RequestBody Inventory inventory) {
+        return service.save(inventory);
+    }
+
+    // ================= UPDATE =================
+    @PutMapping("/{id}")
+    public Inventory update(
+            @PathVariable Long id,
+            @RequestBody Inventory inventory
+    ) {
+        inventory.setId(id);
+        return service.save(inventory);
+    }
+
+    // ================= DELETE =================
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
