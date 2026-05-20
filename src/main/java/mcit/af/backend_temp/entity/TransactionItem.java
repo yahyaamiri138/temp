@@ -1,6 +1,6 @@
 package mcit.af.backend_temp.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import mcit.af.backend_temp.enumeration.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -23,5 +23,6 @@ public class TransactionItem {
     private Product product;
 
     @ManyToOne
+    @JsonBackReference
     private Transaction transaction;
 }

@@ -1,10 +1,18 @@
 package mcit.af.backend_temp.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import mcit.af.backend_temp.enumeration.DebtType;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "debts")
+@Getter
+@Setter
 public class Debt {
 
     @Id
@@ -13,39 +21,19 @@ public class Debt {
 
     private BigDecimal amount;
 
+    private BigDecimal paidAmount;
+
+    private BigDecimal remainingAmount;
+
     private String description;
 
-    // Constructors
-    public Debt() {}
+    private LocalDate dueDate;
 
-    public Debt(Long id, BigDecimal amount, String description) {
-        this.id = id;
-        this.amount = amount;
-        this.description = description;
-    }
+    private Boolean paid = false;
 
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private DebtType type;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @ManyToOne
+    private Party party;
 }

@@ -1,6 +1,7 @@
 package mcit.af.backend_temp.controller;
 
 import lombok.RequiredArgsConstructor;
+import mcit.af.backend_temp.dto.InventoryRequest;
 import mcit.af.backend_temp.entity.Inventory;
 import mcit.af.backend_temp.service.InventoryService;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +23,17 @@ public class InventoryController {
 
     // ================= CREATE =================
     @PostMapping
-    public Inventory create(@RequestBody Inventory inventory) {
-        return service.save(inventory);
+    public Inventory create(@RequestBody InventoryRequest inventoryRequest) {
+        return service.create(inventoryRequest);
     }
 
     // ================= UPDATE =================
     @PutMapping("/{id}")
     public Inventory update(
             @PathVariable Long id,
-            @RequestBody Inventory inventory
+            @RequestBody InventoryRequest inventoryRequest
     ) {
-        inventory.setId(id);
-        return service.save(inventory);
+      return service.update(id, inventoryRequest);
     }
 
     // ================= DELETE =================

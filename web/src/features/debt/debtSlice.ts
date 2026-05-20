@@ -19,14 +19,34 @@ export const deleteDebt = createAsyncThunk(
   },
 );
 
+export const updateDebt = createAsyncThunk("debt/update", async (data: any) => {
+  const res = await axiosInstance.put(`/debts/${data.id}`, data);
+
+  return res.data;
+});
+
 const debtSlice = createSlice({
   name: "debt",
   initialState: { list: [] as any[], loading: false },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchDebts.fulfilled, (state, action) => {
-      state.list = action.payload;
-    });
+    builder
+      .addCase(fetchDebts.fulfilled, (state, action) => {
+        state.list = action.payload;
+      })
+      .addCase(createDebt.fulfilled, (state, action) => {
+        state.list.push(action.payload);
+      })
+      .addCase(updateDebt.fulfilled, (state, action) => {
+        const index = state.list.findIndex((d) => d.id === action.payload.id);
+
+        if (index !== -1) {
+          state.list[index] = action.payload;
+        }
+      })
+      .addCase(deleteDebt.fulfilled, (state, action) => {
+        state.list = state.list.filter((d) => d.id !== action.payload);
+      });
   },
 });
 

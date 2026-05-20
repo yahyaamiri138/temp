@@ -56,6 +56,15 @@ export const deleteTransaction = createAsyncThunk(
   },
 );
 
+// ================= UPDATE =================
+export const updateTransaction = createAsyncThunk(
+  "transaction/update",
+  async (data: any) => {
+    const res = await axiosInstance.put(`/transactions/${data.id}`, data);
+    return res.data;
+  },
+);
+
 // ================= SLICE =================
 const transactionSlice = createSlice({
   name: "transaction",
@@ -81,6 +90,13 @@ const transactionSlice = createSlice({
       // ❌ DELETE
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.list = state.list.filter((t) => t.id !== action.payload);
+      })
+      // ✏️ UPDATE
+      .addCase(updateTransaction.fulfilled, (state, action) => {
+        const index = state.list.findIndex((t) => t.id === action.payload.id);
+        if (index !== -1) {
+          state.list[index] = action.payload;
+        }
       });
   },
 });

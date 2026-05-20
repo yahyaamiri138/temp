@@ -1,6 +1,6 @@
 package mcit.af.backend_temp.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import mcit.af.backend_temp.enumeration.TransactionType;
 import mcit.af.backend_temp.enumeration.PaymentType;
 import jakarta.persistence.*;
@@ -28,9 +28,14 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
+    private Double totalAmount;
+ 
     @ManyToOne
     private Party party;
 
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<TransactionItem> items;
+
+   
 }

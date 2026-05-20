@@ -21,7 +21,6 @@ const CategoryList = () => {
   const { list } = useSelector((state: RootState) => state.category);
   const { t, i18n } = useTranslation();
   const toast = useRef<Toast>(null);
-
   const [formVisible, setFormVisible] = useState(false);
   const [selected, setSelected] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -91,7 +90,6 @@ const CategoryList = () => {
     <div className="card">
       <Toast ref={toast} />
       <ConfirmDialog />
-
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
           <h5>{t("categories.title")}</h5>
@@ -102,13 +100,11 @@ const CategoryList = () => {
             onClick={handleAdd}
           />
         </div>
-
         <DataTable value={list} paginator rows={5}>
           <Column field="name" header={t("categories.name")} />
           <Column header={t("categories.actions")} body={actionBody} />
         </DataTable>
       </div>
-
       <CategoryForm
         visible={formVisible}
         onHide={() => setFormVisible(false)}

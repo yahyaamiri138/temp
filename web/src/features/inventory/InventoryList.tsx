@@ -1,34 +1,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-
 import type { AppDispatch, RootState } from "../../app/stores";
-
 import InventoryForm from "./InventoryForm";
-
 import {
   fetchInventory,
   createInventory,
   updateInventory,
   deleteInventory,
 } from "./inventorySlice";
-
 import { fetchProducts } from "../product/productSlice";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
+import { useRef } from "react";
 
 const InventoryList = () => {
   const dispatch = useDispatch<AppDispatch>();
-
   const { list } = useSelector((state: RootState) => state.inventory);
-
   const { products } = useSelector((state: RootState) => state.products);
-
+  const toast = useRef<Toast>(null);
   const [formVisible, setFormVisible] = useState(false);
-
   const [selected, setSelected] = useState<any>(null);
-
   const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
@@ -42,7 +36,6 @@ const InventoryList = () => {
       productId: null,
       quantity: 0,
     });
-
     setIsEditMode(false);
     setFormVisible(true);
   };
@@ -54,27 +47,46 @@ const InventoryList = () => {
       productId: row.product?.id,
       quantity: row.quantity,
     });
-
     setIsEditMode(true);
     setFormVisible(true);
   };
 
   // ================= DELETE =================
-  const handleDelete = async (id: number) => {
-    await dispatch(deleteInventory(id));
-    dispatch(fetchInventory());
+  const handleDelete = (id: number) => {
+    confirmDialog({
+      message: "Are you sure you want to delete this inventory?",
+      header: "Confirm Delete",
+      icon: "pi pi-exclamation-triangle",
+      accept: async () => {
+        await dispatch(deleteInventory(id));
+        toast.current?.show({
+          severity: "success",
+          summary: "Deleted",
+          detail: "Inventory deleted successfully",
+        });
+        dispatch(fetchInventory());
+      },
+    });
   };
 
   // ================= SAVE =================
   const handleSubmit = async (data: any, editMode: boolean) => {
     if (editMode) {
       await dispatch(updateInventory(data));
+      toast.current?.show({
+        severity: "success",
+        summary: "Updated",
+        detail: "Inventory updated successfully",
+      });
     } else {
       await dispatch(createInventory(data));
+      toast.current?.show({
+        severity: "success",
+        summary: "Created",
+        detail: "Inventory created successfully",
+      });
     }
-
     setFormVisible(false);
-
     dispatch(fetchInventory());
   };
 
@@ -86,7 +98,6 @@ const InventoryList = () => {
         style={{ cursor: "pointer" }}
         onClick={() => handleEdit(row)}
       />
-
       <i
         className="pi pi-trash text-danger"
         style={{ cursor: "pointer" }}
@@ -97,10 +108,11 @@ const InventoryList = () => {
 
   return (
     <div className="card">
+      <Toast ref={toast} />
+      <ConfirmDialog />
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
           <h5>Inventory</h5>
-
           <Button
             label="Add Inventory"
             icon="pi pi-plus"
@@ -109,19 +121,13 @@ const InventoryList = () => {
             onClick={handleAdd}
           />
         </div>
-
         <DataTable value={list} paginator rows={5}>
           <Column field="id" header="ID" />
-
           <Column field="product.name" header="Product" />
-
           <Column field="quantity" header="Quantity" />
-
           <Column header="Actions" body={actionBody} />
         </DataTable>
-
         {/* ================= FORM ================= */}
-
         <InventoryForm
           visible={formVisible}
           onHide={() => setFormVisible(false)}
