@@ -17,18 +17,15 @@ import {
 import type { RootState, AppDispatch } from "../../app/stores";
 
 import PartyForm from "./PartyForm";
+import { useTranslation } from "react-i18next";
 
 const PartyList = () => {
   const dispatch = useDispatch<AppDispatch>();
-
   const { list } = useSelector((state: RootState) => state.party);
-
   const toast = useRef<Toast>(null);
-
+  const { t } = useTranslation();
   const [formVisible, setFormVisible] = useState(false);
-
   const [selected, setSelected] = useState<any>(null);
-
   const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
@@ -60,8 +57,8 @@ const PartyList = () => {
   // ================= DELETE =================
   const handleDelete = (id: number) => {
     confirmDialog({
-      message: "Are you sure you want to delete this party?",
-      header: "Delete Confirmation",
+      message: t("parties.confirmDelete"),
+      header: t("parties.deleteConfirmation"),
       icon: "pi pi-exclamation-triangle",
 
       accept: async () => {
@@ -70,8 +67,8 @@ const PartyList = () => {
 
           toast.current?.show({
             severity: "success",
-            summary: "Deleted",
-            detail: "Party deleted successfully",
+            summary: t("parties.deleted"),
+            detail: t("parties.partyDeletedSuccessfully"),
             life: 3000,
           });
 
@@ -79,8 +76,8 @@ const PartyList = () => {
         } catch {
           toast.current?.show({
             severity: "error",
-            summary: "Error",
-            detail: "Failed to delete party",
+            summary: t("parties.error"),
+            detail: t("parties.failedToDeleteParty"),
             life: 3000,
           });
         }
@@ -96,8 +93,8 @@ const PartyList = () => {
 
         toast.current?.show({
           severity: "success",
-          summary: "Updated",
-          detail: "Party updated successfully",
+          summary: t("parties.updated"),
+          detail: t("parties.partyUpdatedSuccessfully"),
           life: 3000,
         });
       } else {
@@ -105,8 +102,8 @@ const PartyList = () => {
 
         toast.current?.show({
           severity: "success",
-          summary: "Created",
-          detail: "Party created successfully",
+          summary: t("parties.created"),
+          detail: t("parties.partyCreatedSuccessfully"),
           life: 3000,
         });
       }
@@ -117,8 +114,8 @@ const PartyList = () => {
     } catch {
       toast.current?.show({
         severity: "error",
-        summary: "Error",
-        detail: "Something went wrong",
+        summary: t("parties.error"),
+        detail: t("parties.failedToCreateParty"),
         life: 3000,
       });
     }
@@ -134,10 +131,10 @@ const PartyList = () => {
 
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
-          <h5>Parties</h5>
+          <h5>{t("parties.title")}</h5>
 
           <Button
-            label="Add Party"
+            label={t("parties.addParty")}
             className="rounded p-2"
             icon="pi pi-plus"
             size="small"
@@ -146,14 +143,14 @@ const PartyList = () => {
         </div>
 
         <DataTable value={list} paginator rows={5}>
-          <Column field="name" header="Name" />
+          <Column field="name" header={t("parties.name")} />
 
-          <Column field="phone" header="Phone" />
+          <Column field="phone" header={t("parties.phone")} />
 
-          <Column field="type" header="Type" />
+          <Column field="type" header={t("parties.type")} />
 
           <Column
-            header="Actions"
+            header={t("parties.actions")}
             body={(row) => (
               <>
                 {/* EDIT */}

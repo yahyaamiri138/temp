@@ -1,6 +1,10 @@
 import { Dialog } from "primereact/dialog";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Tag } from "primereact/tag";
+import { useTranslation } from "react-i18next";
 
 interface TransactionViewProps {
   visible: boolean;
@@ -13,28 +17,63 @@ const TransactionView = ({
   onHide,
   transaction,
 }: TransactionViewProps) => {
+  const { t } = useTranslation();
+
   if (!transaction) return null;
+
+  const typeBodyTemplate = (rowData: any) => {
+    return (
+      <Tag
+        value={rowData.type}
+        severity={rowData.type === "SELL" ? "success" : "info"}
+      />
+    );
+  };
+
+  const paymentTypeBodyTemplate = (rowData: any) => {
+    return (
+      <Tag
+        value={rowData.paymentType}
+        severity={rowData.paymentType === "CASH" ? "info" : "warning"}
+      />
+    );
+  };
+
+  const priceBodyTemplate = (rowData: any) => {
+    return `$${rowData.price?.toLocaleString() || 0}`;
+  };
+
+  const subtotalBodyTemplate = (rowData: any) => {
+    return (
+      <span className="fw-bold">
+        ${(rowData.quantity * rowData.price)?.toLocaleString() || 0}
+      </span>
+    );
+  };
+
+  const footer = (
+    <div className="d-flex justify-content-end">
+      <Button
+        label={t("common.close")}
+        icon="pi pi-times"
+        className="p-button-text"
+        onClick={onHide}
+      />
+    </div>
+  );
 
   return (
     <Dialog
-      header="Transaction Details"
+      header={t("transaction.details")}
       visible={visible}
-      style={{ width: "80vh", maxWidth: "90vw" }}
+      style={{ width: "85vw", maxWidth: "1000px" }}
       onHide={onHide}
       modal
-      footer={
-        <div className="d-flex justify-content-end">
-          <Button
-            label="Close"
-            icon="pi pi-times"
-            className="p-button-text"
-            onClick={onHide}
-          />
-        </div>
-      }
+      footer={footer}
     >
       <Card>
-        <div className="row g-3">
+        <div className="row g-4">
+          {/* Basic Info */}
           <div className="col-md-6">
             <b>ID</b>
             <div className="mt-1">{transaction.id}</div>
@@ -47,28 +86,12 @@ const TransactionView = ({
 
           <div className="col-md-6">
             <b>Type</b>
-            <div className="mt-1">
-              <span
-                className={`badge ${
-                  transaction.type === "SELL" ? "bg-success" : "bg-primary"
-                }`}
-              >
-                {transaction.type}
-              </span>
-            </div>
+            <div className="mt-2">{typeBodyTemplate(transaction)}</div>
           </div>
 
           <div className="col-md-6">
             <b>Payment Type</b>
-            <div className="mt-1">
-              <span
-                className={`badge ${
-                  transaction.paymentType === "CASH" ? "bg-info" : "bg-warning"
-                }`}
-              >
-                {transaction.paymentType}
-              </span>
-            </div>
+            <div className="mt-2">{paymentTypeBodyTemplate(transaction)}</div>
           </div>
 
           <div className="col-md-6">
@@ -82,54 +105,55 @@ const TransactionView = ({
 
           <div className="col-md-6">
             <b>Total Amount</b>
-            <div className="mt-1 text-primary fw-bold">
+            <div className="mt-1 text-primary fw-bold fs-5">
               ${transaction.totalAmount?.toLocaleString() || 0}
             </div>
           </div>
 
+          {/* Items Table */}
           <div className="col-12">
-            <b>Items</b>
-            <div className="mt-2">
-              <div className="table-responsive">
-                <table className="table table-sm table-bordered">
-                  <thead className="table-light">
-                    <tr>
-                      <th>#</th>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {transaction.items?.map((item: any, index: number) => (
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.productName}</td>
-                        <td>{item.quantity}</td>
-                        <td>${item.price?.toLocaleString() || 0}</td>
-                        <td className="fw-bold">
-                          ${(item.quantity * item.price)?.toLocaleString() || 0}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  <tfoot className="table-light">
-                    <tr>
-                      <td colSpan={4} className="text-end fw-bold">
-                        Grand Total:
-                      </td>
-                      <td className="fw-bold text-primary">
-                        ${transaction.totalAmount?.toLocaleString() || 0}
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
+            <h5 className="mb-3">{t("transaction.items")}</h5>
+
+            <DataTable
+              value={transaction.items || []}
+              responsiveLayout="scroll"
+              stripedRows
+              showGridlines
+              size="small"
+              emptyMessage={t("common.noData")}
+              footer={
+                <div className="d-flex justify-content-end fw-bold">
+                  <span className="me-3">Grand Total:</span>
+                  <span className="text-primary">
+                    ${transaction.totalAmount?.toLocaleString() || 0}
+                  </span>
+                </div>
+              }
+            >
+              <Column
+                header="#"
+                body={(_, options) => options.rowIndex + 1}
+                style={{ width: "70px" }}
+              />
+
+              <Column field="productName" header={t("transaction.product")} />
+
+              <Column field="quantity" header={t("transaction.quantity")} />
+
+              <Column
+                field="price"
+                header={t("transaction.price")}
+                body={priceBodyTemplate}
+              />
+
+              <Column
+                header={t("transaction.subtotal")}
+                body={subtotalBodyTemplate}
+              />
+            </DataTable>
           </div>
 
-          {/* Additional Info if needed */}
+          {/* Extra Info */}
           {transaction.createdAt && (
             <div className="col-md-6">
               <b>Created At</b>

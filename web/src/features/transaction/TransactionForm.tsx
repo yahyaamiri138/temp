@@ -3,6 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
 
 const TransactionForm = ({
   visible,
@@ -23,22 +24,20 @@ const TransactionForm = ({
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [price, setPrice] = useState<number>(0);
+  const { t, i18n } = useTranslation();
 
   const addItem = () => {
     if (!selectedProduct) return;
-
     const newItem = {
       productId: selectedProduct.id,
       productName: selectedProduct.name,
       quantity,
       price,
     };
-
     setTransaction({
       ...transaction,
       items: [...transaction.items, newItem],
     });
-
     // Reset fields
     setSelectedProduct(null);
     setQuantity(1);
@@ -53,7 +52,7 @@ const TransactionForm = ({
 
   return (
     <Dialog
-      header={isEditMode ? "Edit Transaction" : "Create Transaction"}
+      header={isEditMode ? t("transaction.edit") : t("transaction.create")}
       visible={visible}
       style={{ width: "850px" }}
       onHide={onHide}
@@ -63,7 +62,9 @@ const TransactionForm = ({
         {/* Row 1: Party + Transaction Type */}
         <div className="row mb-3">
           <div className="col-md-6">
-            <label className="form-label fw-bold">Party</label>
+            <label className="form-label fw-bold">
+              {t("transaction.party")}
+            </label>
             <Dropdown
               value={transaction.partyId}
               options={parties}
@@ -72,17 +73,19 @@ const TransactionForm = ({
               onChange={(e) =>
                 setTransaction({ ...transaction, partyId: e.value })
               }
-              placeholder="Select Party"
+              placeholder={t("transaction.selectParty")}
               className="w-100"
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label fw-bold">Transaction Type</label>
+            <label className="form-label fw-bold">
+              {t("transaction.type")}
+            </label>
             <Dropdown
               value={transaction.type}
               options={[
-                { label: "SELL", value: "SELL" },
-                { label: "BUY", value: "BUY" },
+                { label: t("transaction.sell"), value: "SELL" },
+                { label: t("transaction.buy"), value: "BUY" },
               ]}
               onChange={(e) =>
                 setTransaction({ ...transaction, type: e.value })
@@ -95,12 +98,14 @@ const TransactionForm = ({
         {/* Row 2: Payment Type + Product */}
         <div className="row mb-3">
           <div className="col-md-6">
-            <label className="form-label fw-bold">Payment Type</label>
+            <label className="form-label fw-bold">
+              {t("transaction.paymentType")}
+            </label>
             <Dropdown
               value={transaction.paymentType}
               options={[
-                { label: "CASH", value: "CASH" },
-                { label: "CREDIT", value: "CREDIT" },
+                { label: t("transaction.cash"), value: "CASH" },
+                { label: t("transaction.credit"), value: "CREDIT" },
               ]}
               onChange={(e) =>
                 setTransaction({ ...transaction, paymentType: e.value })
@@ -109,13 +114,15 @@ const TransactionForm = ({
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label fw-bold">Product</label>
+            <label className="form-label fw-bold">
+              {t("transaction.product")}
+            </label>
             <Dropdown
               value={selectedProduct}
               options={products}
               optionLabel="name"
               onChange={(e) => setSelectedProduct(e.value)}
-              placeholder="Select Product"
+              placeholder={t("transaction.selectProduct")}
               className="w-100"
             />
           </div>
@@ -124,7 +131,9 @@ const TransactionForm = ({
         {/* Row 3: Quantity + Price + Add Button */}
         <div className="row mb-4 align-items-end">
           <div className="col-md-5">
-            <label className="form-label fw-bold">Quantity</label>
+            <label className="form-label fw-bold">
+              {t("transaction.quantity")}
+            </label>
             <InputNumber
               value={quantity}
               onValueChange={(e) => setQuantity(e.value || 1)}
@@ -133,7 +142,9 @@ const TransactionForm = ({
             />
           </div>
           <div className="col-md-5">
-            <label className="form-label fw-bold">Price</label>
+            <label className="form-label fw-bold">
+              {t("transaction.price")}
+            </label>
             <InputNumber
               value={price}
               onValueChange={(e) => setPrice(e.value || 0)}
@@ -143,9 +154,11 @@ const TransactionForm = ({
             />
           </div>
           <div className="col-md-2 ">
-            <label className="form-label fw-bold invisible">Action</label>
+            <label className="form-label fw-bold invisible">
+              {t("transaction.action")}
+            </label>
             <Button
-              label="Add"
+              label={t("transaction.add")}
               icon="pi pi-plus"
               size="small"
               onClick={addItem}
@@ -159,7 +172,9 @@ const TransactionForm = ({
         {/* Items List - Full Width */}
         <div className="row mb-4">
           <div className="col-12">
-            <label className="form-label fw-bold mb-2">Items</label>
+            <label className="form-label fw-bold mb-2">
+              {t("transaction.items")}
+            </label>
 
             {transaction.items.length === 0 ? (
               <p className="text-muted border p-3 rounded">

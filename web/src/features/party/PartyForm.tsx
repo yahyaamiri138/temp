@@ -3,6 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
 
 const PartyForm = ({
   visible,
@@ -12,26 +13,27 @@ const PartyForm = ({
   isEditMode,
 }: any) => {
   const [party, setParty] = useState<any>({});
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     setParty(initialData || {});
   }, [initialData]);
 
   const partyTypes = [
-    { label: "Customer", value: "CUSTOMER" },
-    { label: "Supplier", value: "SUPPLIER" },
+    { label: t("parties.customer"), value: "CUSTOMER" },
+    { label: t("parties.supplier"), value: "SUPPLIER" },
   ];
 
   return (
     <Dialog
-      header={isEditMode ? "Edit Party" : "Add Party"}
+      header={isEditMode ? t("parties.editParty") : t("parties.addParty")}
       visible={visible}
       style={{ width: "500px" }}
       onHide={onHide}
       modal
     >
       <div className="mb-3">
-        <label>Name</label>
+        <label>{t("parties.name")}</label>
 
         <InputText
           value={party?.name || ""}
@@ -46,7 +48,7 @@ const PartyForm = ({
       </div>
 
       <div className="mb-3">
-        <label>Phone</label>
+        <label>{t("parties.phone")}</label>
 
         <InputText
           value={party?.phone || ""}
@@ -61,14 +63,14 @@ const PartyForm = ({
       </div>
 
       <div className="mb-3">
-        <label>Type</label>
+        <label>{t("parties.type")}</label>
 
         <Dropdown
           value={party?.type}
           options={partyTypes}
           optionLabel="label"
           optionValue="value"
-          placeholder="Select Type"
+          placeholder={t("parties.selectType")}
           className="w-100"
           onChange={(e) =>
             setParty({
@@ -80,7 +82,7 @@ const PartyForm = ({
       </div>
 
       <Button
-        label={isEditMode ? "Update" : "Create"}
+        label={isEditMode ? t("parties.updateParty") : t("parties.createParty")}
         icon="pi pi-check"
         className="w-100 rounded"
         size="small"

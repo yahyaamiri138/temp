@@ -28,7 +28,12 @@
     "categories": "Categories",
     "reports": "Reports",
     "logout": "Logout",
-    "adminPanel": "Admin Panel"
+    "adminPanel": "Admin Panel",
+    "inventory": "Inventory",
+    "parties": "Parties",
+    "transactions": "Transactions",
+    "transactionItems": "Transaction Items",
+    "debts": "Debts"
   },
 
   "topbar": {
@@ -74,10 +79,12 @@
   "validation": {
     "required": "This field is required"
   },
+
   "roles": {
     "ROLE_ADMIN": "Administrator",
     "ROLE_USER": "User"
   },
+
   "reports": {
     "title": "Reports",
     "description": "This is the reports page. Here you can manage and view system reports.",
@@ -91,6 +98,7 @@
     "search": "Search",
     "reset": "Reset"
   },
+
   "categories": {
     "title": "Category",
     "id": "Id",
@@ -101,6 +109,7 @@
     "delete": "Delete",
     "save": "Save"
   },
+
   "products": {
     "title": "Product",
     "id": "Id",
@@ -115,5 +124,153 @@
     "delete": "Delete",
     "save": "Save",
     "select": "Select"
+  },
+
+  "debts": {
+    "title": "Debts",
+    "addDebt": "Add Debt",
+    "editDebt": "Edit Debt",
+    "debtDetails": "Debt Details",
+    "amount": "Amount",
+    "paidAmount": "Paid Amount",
+    "remainingAmount": "Remaining Amount",
+    "debtType": "Debt Type",
+    "party": "Party",
+    "dueDate": "Due Date",
+    "description": "Description",
+    "status": "Status",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "paid": "PAID",
+    "unpaid": "UNPAID",
+    "take": "TAKE (I owe)",
+    "give": "GIVE (They owe me)",
+    "takeShort": "TAKE",
+    "giveShort": "GIVE",
+    "selectParty": "Select Party",
+    "noDebtsFound": "No Debts Found",
+    "debtCreatedSuccessfully": "Debt created successfully",
+    "debtUpdatedSuccessfully": "Debt updated successfully",
+    "debtDeletedSuccessfully": "Debt deleted successfully",
+    "failedToCreate": "Failed to create debt",
+    "failedToUpdate": "Failed to update debt",
+    "failedToDelete": "Failed to delete debt",
+    "confirmDelete": "Are you sure you want to delete this debt?",
+    "deleteConfirmation": "Delete Confirmation",
+    "createdAt": "Created At",
+    "lastUpdated": "Last Updated",
+    "close": "Close",
+    "create": "Create",
+    "update": "Update",
+    "automaticallyCalculated": "Automatically calculated (Amount - Paid)",
+    "iOwe": "I owe",
+    "theyOweMe": "They owe me"
+  },
+
+  "inventory": {
+    "title": "Inventory",
+    "addInventory": "Add Inventory",
+    "editInventory": "Edit Inventory",
+    "product": "Product",
+    "quantity": "Quantity",
+    "actions": "Actions",
+    "inventoryCreatedSuccessfully": "Inventory created successfully",
+    "inventoryUpdatedSuccessfully": "Inventory updated successfully",
+    "inventoryDeletedSuccessfully": "Inventory deleted successfully",
+    "failedToCreate": "Failed to create inventory",
+    "failedToUpdate": "Failed to update inventory",
+    "failedToDelete": "Failed to delete inventory",
+    "confirmDelete": "Are you sure you want to delete this inventory?",
+    "deleteConfirmation": "Confirm Delete",
+    "selectProduct": "Select Product",
+    "noInventoryFound": "No Inventory Found"
+  },
+
+  "parties": {
+    "title": "Parties",
+    "addParty": "Add Party",
+    "editParty": "Edit Party",
+    "updateParty": "Update",
+    "createParty": "Create",
+    "partyDetails": "Party Details",
+    "name": "Name",
+    "phone": "Phone",
+    "type": "Type",
+    "actions": "Actions",
+    "customer": "Customer",
+    "supplier": "Supplier",
+    "selectType": "Select Type",
+    "partyCreatedSuccessfully": "Party created successfully",
+    "partyUpdatedSuccessfully": "Party updated successfully",
+    "partyDeletedSuccessfully": "Party deleted successfully",
+    "failedToCreate": "Failed to create party",
+    "failedToUpdate": "Failed to update party",
+    "failedToDelete": "Failed to delete party",
+    "confirmDelete": "Are you sure you want to delete this party?",
+    "deleteConfirmation": "Delete Confirmation",
+    "noPartiesFound": "No Parties Found"
+  },
+
+  "transactions": {
+    "title": "Transactions",
+    "addTransaction": "Add Transaction",
+    "editTransaction": "Edit Transaction",
+    "transactionDetails": "Transaction Details",
+    "party": "Party",
+    "transactionType": "Transaction Type",
+    "paymentType": "Payment Type",
+    "date": "Date",
+    "totalAmount": "Total Amount",
+    "itemsCount": "Items Count",
+    "items": "Items",
+    "product": "Product",
+    "quantity": "Quantity",
+    "price": "Price",
+    "subtotal": "Subtotal",
+    "grandTotal": "Grand Total",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "sell": "SELL",
+    "buy": "BUY",
+    "cash": "CASH",
+    "credit": "CREDIT",
+    "selectParty": "Select Party",
+    "selectProduct": "Select Product",
+    "addItem": "Add Item",
+    "noItemsAdded": "No items added yet.",
+    "transactionCreatedSuccessfully": "Transaction created successfully",
+    "transactionUpdatedSuccessfully": "Transaction updated successfully",
+    "transactionDeletedSuccessfully": "Transaction deleted successfully",
+    "failedToCreate": "Failed to create transaction",
+    "failedToUpdate": "Failed to update transaction",
+    "failedToDelete": "Failed to delete transaction",
+    "confirmDelete": "Are you sure you want to delete this transaction?",
+    "deleteConfirmation": "Delete Confirmation",
+    "createdAt": "Created At",
+    "lastUpdated": "Last Updated",
+    "close": "Close",
+    "yesDelete": "Yes, Delete",
+    "cancel": "Cancel",
+    "noTransactionsFound": "No Transactions Found"
+  },
+
+  "transactionItems": {
+    "id": "Id",
+    "title": "Transaction Items",
+    "product": "Product",
+    "quantity": "Qty",
+    "price": "Price",
+    "party": "Party",
+    "transactionType": "Type",
+    "paymentType": "Payment",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noItemsFound": "No Transaction Items Found"
   }
 }

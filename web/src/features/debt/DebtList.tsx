@@ -13,6 +13,7 @@ import DebtView from "./DebtView";
 
 import type { AppDispatch, RootState } from "../../app/stores";
 import { fetchParties } from "../party/partySlice";
+import { useTranslation } from "react-i18next";
 
 const DebtList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +26,7 @@ const DebtList = () => {
   const [viewVisible, setViewVisible] = useState(false);
   const [viewDebt, setViewDebt] = useState<any>(null);
   const toastRef = useRef<Toast>(null);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchDebts());
@@ -39,16 +41,16 @@ const DebtList = () => {
 
         toastRef.current?.show({
           severity: "success",
-          summary: "Success",
-          detail: "Debt Updated Successfully",
+          summary: t("debts.updated"),
+          detail: t("debts.debtUpdatedSuccessfully"),
         });
       } else {
         await dispatch(createDebt(data));
 
         toastRef.current?.show({
           severity: "success",
-          summary: "Success",
-          detail: "Debt Created Successfully",
+          summary: t("debts.created"),
+          detail: t("debts.debtCreatedSuccessfully"),
         });
       }
 
@@ -58,8 +60,10 @@ const DebtList = () => {
     } catch (error) {
       toastRef.current?.show({
         severity: "error",
-        summary: "Error",
-        detail: isEditMode ? "Failed to update debt" : "Failed to create debt",
+        summary: t("debts.error"),
+        detail: isEditMode
+          ? t("debts.failedToUpdate")
+          : t("debts.failedToCreate"),
       });
 
       console.error(error);
@@ -69,8 +73,8 @@ const DebtList = () => {
   // ================= DELETE =================
   const handleDelete = (id: number) => {
     confirmDialog({
-      message: "Are you sure you want to delete this debt?",
-      header: "Delete Confirmation",
+      message: t("debts.confirmDelete"),
+      header: t("debts.deleteConfirmation"),
       icon: "pi pi-exclamation-triangle",
 
       accept: async () => {
@@ -78,8 +82,8 @@ const DebtList = () => {
 
         toastRef.current?.show({
           severity: "success",
-          summary: "Deleted",
-          detail: "Debt Deleted Successfully",
+          summary: t("debts.deleted"),
+          detail: t("debts.debtDeletedSuccessfully"),
         });
 
         dispatch(fetchDebts());
@@ -125,10 +129,10 @@ const DebtList = () => {
 
         {/* ================= HEADER ================= */}
         <div className="d-flex justify-content-between mb-3">
-          <h5>Debts</h5>
+          <h5>{t("debts.title")}</h5>
 
           <Button
-            label="Add Debt"
+            label={t("debts.addDebt")}
             icon="pi pi-plus"
             className="rounded"
             size="small"
@@ -142,37 +146,37 @@ const DebtList = () => {
           paginator
           rows={5}
           responsiveLayout="scroll"
-          emptyMessage="No Debts Found"
+          emptyMessage={t("debts.noDebtsFound")}
         >
-          <Column field="id" header="ID" />
+          <Column field="id" header={t("debts.id")} />
 
-          <Column field="party.name" header="Party" />
+          <Column field="party.name" header={t("debts.party")} />
 
-          <Column field="type" header="Debt Type" />
+          <Column field="type" header={t("debts.debtType")} />
 
           <Column
             field="amount"
-            header="Amount"
+            header={t("debts.amount")}
             body={(row) => `$${row.amount?.toLocaleString() || 0}`}
           />
 
           <Column
             field="paidAmount"
-            header="Paid"
+            header={t("debts.paidAmount")}
             body={(row) => `$${row.paidAmount?.toLocaleString() || 0}`}
           />
 
           <Column
             field="remainingAmount"
-            header="Remaining"
+            header={t("debts.remainingAmount")}
             body={(row) => `$${row.remainingAmount?.toLocaleString() || 0}`}
           />
 
-          <Column field="description" header="Description" />
+          <Column field="description" header={t("debts.description")} />
 
           <Column
             field="dueDate"
-            header="Due Date"
+            header={t("debts.dueDate")}
             body={(row) =>
               row.dueDate ? new Date(row.dueDate).toLocaleDateString() : "-"
             }
@@ -180,28 +184,28 @@ const DebtList = () => {
 
           <Column
             field="paid"
-            header="Status"
+            header={t("debts.status")}
             body={(row) => (
               <span
                 className={
                   row.paid ? "text-success fw-bold" : "text-danger fw-bold"
                 }
               >
-                {row.paid ? "PAID" : "UNPAID"}
+                {row.paid ? t("debts.paid") : t("debts.unpaid")}
               </span>
             )}
           />
 
           {/* ================= ACTIONS ================= */}
           <Column
-            header="Actions"
+            header={t("debts.actions")}
             body={(row) => (
               <div className="d-flex gap-3">
                 {/* VIEW */}
                 <i
                   className="pi pi-eye text-info"
                   style={{ cursor: "pointer" }}
-                  title="View"
+                  title={t("debts.view")}
                   onClick={() => handleView(row)}
                 />
 
@@ -209,7 +213,7 @@ const DebtList = () => {
                 <i
                   className="pi pi-pencil text-primary"
                   style={{ cursor: "pointer" }}
-                  title="Edit"
+                  title={t("debts.edit")}
                   onClick={() => handleEdit(row)}
                 />
 
@@ -217,7 +221,7 @@ const DebtList = () => {
                 <i
                   className="pi pi-trash text-danger"
                   style={{ cursor: "pointer" }}
-                  title="Delete"
+                  title={t("debts.delete")}
                   onClick={() => handleDelete(row.id)}
                 />
               </div>

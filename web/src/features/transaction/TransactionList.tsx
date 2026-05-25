@@ -1,175 +1,3 @@
-// import { useEffect, useState, useRef } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { DataTable } from "primereact/datatable";
-// import { Column } from "primereact/column";
-// import { Button } from "primereact/button";
-// import {
-//   fetchTransactions,
-//   createTransaction,
-//   deleteTransaction,
-//   updateTransaction,
-// } from "./transactionSlice";
-// import TransactionForm from "./TransactionForm";
-// import type { AppDispatch, RootState } from "../../app/stores";
-// import { fetchProducts } from "../product/productSlice";
-// import { fetchParties } from "../party/partySlice";
-// import { Toast } from "primereact/toast";
-// import { confirmDialog } from "primereact/confirmdialog";
-
-// const TransactionList = () => {
-//   const dispatch = useDispatch<AppDispatch>();
-//   const { list } = useSelector((state: any) => state.transaction);
-//   const [formVisible, setFormVisible] = useState(false);
-//   const [selected, setSelected] = useState<any>(null);
-//   const [isEditMode, setIsEditMode] = useState(false);
-
-//   // ✅ Create a ref for Toast
-//   const toastRef = useRef<Toast>(null);
-
-//   const { list: parties } = useSelector((state: RootState) => state.party);
-//   const { products } = useSelector((state: RootState) => state.products);
-
-//   useEffect(() => {
-//     dispatch(fetchTransactions());
-//     dispatch(fetchParties());
-//     dispatch(fetchProducts());
-//   }, [dispatch]);
-
-//   const handleSubmit = async (data: any) => {
-//     try {
-//       if (isEditMode) {
-//         await dispatch(updateTransaction(data));
-//       } else {
-//         await dispatch(createTransaction(data));
-//       }
-
-//       // ✅ Use toastRef.current instead of Toast.current
-//       toastRef.current?.show({
-//         severity: "success",
-//         summary: "Success",
-//         detail: isEditMode ? "Transaction Updated" : "Transaction Created",
-//       });
-
-//       setFormVisible(false);
-//       await dispatch(fetchTransactions());
-//     } catch (error) {
-//       // ✅ Use toastRef.current instead of Toast.current
-//       toastRef.current?.show({
-//         severity: "error",
-//         summary: "Error",
-//         detail: isEditMode
-//           ? "Failed to update transaction"
-//           : "Failed to create transaction",
-//       });
-//       console.error("Transaction submission failed:", error);
-//     }
-//   };
-
-//   const handleDelete = (id: number) => {
-//     confirmDialog({
-//       message: "Delete this transaction?",
-//       header: "Confirmation",
-//       icon: "pi pi-info-circle",
-//       accept: async () => {
-//         await dispatch(deleteTransaction(id));
-//         toastRef.current?.show({
-//           severity: "success",
-//           summary: "Deleted",
-//           detail: "Transaction deleted",
-//         });
-
-//         dispatch(fetchTransactions());
-//       },
-//     });
-//   };
-
-//   return (
-//     <div className="card">
-//       <div className="card-body">
-//         {/* ✅ Add Toast component at the top level */}
-//         <Toast ref={toastRef} />
-
-//         <div className="d-flex justify-content-between mb-3">
-//           <h5>Transactions</h5>
-//           <Button
-//             label="Add Transaction"
-//             icon="pi pi-plus"
-//             className="rounded"
-//             size="small"
-//             onClick={() => {
-//               setSelected(null);
-//               setIsEditMode(false);
-//               setFormVisible(true);
-//             }}
-//           />
-//         </div>
-
-//         <DataTable value={Array.isArray(list) ? list : []} paginator rows={5}>
-//           <Column field="id" header="ID" />
-//           <Column field="party.name" header="Party" />
-//           <Column field="type" header="Type" />
-//           <Column field="paymentType" header="Payment Type" />
-//           <Column
-//             field="date"
-//             header="Date"
-//             body={(row) =>
-//               row.date ? new Date(row.date).toLocaleString() : "-"
-//             }
-//           />
-//           <Column
-//             field="items"
-//             header="Items Count"
-//             body={(row) => row.items?.length || 0}
-//           />
-//           <Column
-//             header="Actions"
-//             body={(row) => (
-//               <div className="d-flex gap-3">
-//                 <i
-//                   className="pi pi-eye text-info"
-//                   style={{ cursor: "pointer" }}
-//                   onClick={() => {
-//                     console.log("VIEW:", row);
-//                   }}
-//                 />
-//                 <i
-//                   className="pi pi-pencil text-primary"
-//                   style={{ cursor: "pointer" }}
-//                   onClick={() => {
-//                     setSelected({
-//                       ...row,
-//                       partyId: row.party?.id,
-//                     });
-//                     setIsEditMode(true);
-//                     setFormVisible(true);
-//                   }}
-//                 />
-//                 <i
-//                   className="pi pi-trash text-danger"
-//                   style={{ cursor: "pointer" }}
-//                   onClick={() => handleDelete(row.id)}
-//                 />
-//               </div>
-//             )}
-//           />
-//         </DataTable>
-
-//         <TransactionForm
-//           visible={formVisible}
-//           onHide={() => setFormVisible(false)}
-//           onSubmit={handleSubmit}
-//           parties={parties}
-//           products={products}
-//           initialData={selected}
-//           isEditMode={isEditMode}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default TransactionList;
-
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataTable } from "primereact/datatable";
@@ -188,6 +16,7 @@ import { fetchProducts } from "../product/productSlice";
 import { fetchParties } from "../party/partySlice";
 import { Toast } from "primereact/toast";
 import { confirmDialog } from "primereact/confirmdialog";
+import { useTranslation } from "react-i18next";
 
 const TransactionList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -197,7 +26,7 @@ const TransactionList = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [viewVisible, setViewVisible] = useState(false);
   const [viewTransaction, setViewTransaction] = useState<any>(null);
-
+  const { t, i18n } = useTranslation();
   const toastRef = useRef<Toast>(null);
 
   const { list: parties } = useSelector((state: RootState) => state.party);
@@ -215,8 +44,8 @@ const TransactionList = () => {
         await dispatch(updateTransaction(data));
         toastRef.current?.show({
           severity: "success",
-          summary: "Success",
-          detail: "Transaction Updated Successfully",
+          summary: t("transaction.updated"),
+          detail: t("transaction.updatedSuccess"),
           life: 3000,
         });
       } else {

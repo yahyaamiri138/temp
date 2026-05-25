@@ -12,7 +12,7 @@ const Topbar = () => {
   const [username, setUsername] = useState<string>("Guest");
   const op = useRef<OverlayPanel>(null);
 
-  const rtlLanguages = ["fa", "ar", "ps"];
+  const rtlLanguages = ["fa", "ps"];
   const isRTL = rtlLanguages.includes(i18n.language);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Topbar = () => {
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
 
-    const rtlLanguages = ["fa", "ar", "ps"];
+    const rtlLanguages = ["fa", "ps"];
     document.documentElement.dir = rtlLanguages.includes(lang) ? "rtl" : "ltr";
 
     op.current?.hide();

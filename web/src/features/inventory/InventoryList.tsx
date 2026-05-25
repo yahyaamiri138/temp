@@ -15,6 +15,7 @@ import { fetchProducts } from "../product/productSlice";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const InventoryList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +25,7 @@ const InventoryList = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [selected, setSelected] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchInventory());
@@ -54,15 +56,15 @@ const InventoryList = () => {
   // ================= DELETE =================
   const handleDelete = (id: number) => {
     confirmDialog({
-      message: "Are you sure you want to delete this inventory?",
-      header: "Confirm Delete",
+      message: t("inventory.confirmDelete"),
+      header: t("inventory.deleteConfirmation"),
       icon: "pi pi-exclamation-triangle",
       accept: async () => {
         await dispatch(deleteInventory(id));
         toast.current?.show({
           severity: "success",
-          summary: "Deleted",
-          detail: "Inventory deleted successfully",
+          summary: t("inventory.deleted"),
+          detail: t("inventory.inventoryDeletedSuccessfully"),
         });
         dispatch(fetchInventory());
       },
@@ -75,15 +77,15 @@ const InventoryList = () => {
       await dispatch(updateInventory(data));
       toast.current?.show({
         severity: "success",
-        summary: "Updated",
-        detail: "Inventory updated successfully",
+        summary: t("inventory.updated"),
+        detail: t("inventory.inventoryUpdatedSuccessfully"),
       });
     } else {
       await dispatch(createInventory(data));
       toast.current?.show({
         severity: "success",
-        summary: "Created",
-        detail: "Inventory created successfully",
+        summary: t("inventory.created"),
+        detail: t("inventory.inventoryCreatedSuccessfully"),
       });
     }
     setFormVisible(false);
@@ -112,9 +114,9 @@ const InventoryList = () => {
       <ConfirmDialog />
       <div className="card-body">
         <div className="d-flex justify-content-between mb-3">
-          <h5>Inventory</h5>
+          <h5>{t("inventory.title")}</h5>
           <Button
-            label="Add Inventory"
+            label={t("inventory.addInventory")}
             icon="pi pi-plus"
             className="rounded"
             size="small"
@@ -122,10 +124,10 @@ const InventoryList = () => {
           />
         </div>
         <DataTable value={list} paginator rows={5}>
-          <Column field="id" header="ID" />
-          <Column field="product.name" header="Product" />
-          <Column field="quantity" header="Quantity" />
-          <Column header="Actions" body={actionBody} />
+          <Column field="id" header={t("inventory.id")} />
+          <Column field="product.name" header={t("inventory.product")} />
+          <Column field="quantity" header={t("inventory.quantity")} />
+          <Column header={t("inventory.actions")} body={actionBody} />
         </DataTable>
         {/* ================= FORM ================= */}
         <InventoryForm

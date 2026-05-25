@@ -4,12 +4,13 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { fetchTransactionItems } from "./transactionItemSlice";
 import type { AppDispatch } from "../../app/stores";
+import { useTranslation } from "react-i18next";
 
 const TransactionItemList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { list } = useSelector((state: any) => state.transactionItem);
-
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(fetchTransactionItems());
   }, [dispatch]);
@@ -17,25 +18,27 @@ const TransactionItemList = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <h5>Transaction Items</h5>
+        <h5>{t("transactionItems.title")}</h5>
 
         <DataTable value={Array.isArray(list) ? list : []} paginator rows={5}>
-          <Column field="id" header="ID" />
-
-          <Column field="product.name" header="Product" />
-
-          <Column field="quantity" header="Qty" />
-
-          <Column field="price" header="Price" />
-
-          <Column field="transaction.party.name" header="Party" />
-
-          <Column field="transaction.type" header="Type" />
-
-          <Column field="transaction.paymentType" header="Payment" />
-
+          <Column field="id" header={t("transactionItems.id")} />
+          <Column field="product.name" header={t("transactionItems.product")} />
+          <Column field="quantity" header={t("transactionItems.quantity")} />
+          <Column field="price" header={t("transactionItems.price")} />
           <Column
-            header="Actions"
+            field="transactionItems.party.name"
+            header={t("transactionItems.party")}
+          />
+          <Column
+            field="transactionItems.type"
+            header={t("transactionItems.type")}
+          />
+          <Column
+            field="transactionItems.paymentType"
+            header={t("transactionItems.paymentType")}
+          />
+          <Column
+            header={t("transactionItems.actions")}
             body={(row) => (
               <div className="d-flex gap-3">
                 {/* VIEW */}

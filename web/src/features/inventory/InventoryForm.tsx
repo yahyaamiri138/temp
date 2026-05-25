@@ -3,6 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
 
 const InventoryForm = ({
   visible,
@@ -13,6 +14,7 @@ const InventoryForm = ({
   isEditMode,
 }: any) => {
   const [item, setItem] = useState<any>({});
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     setItem(initialData || {});
@@ -20,21 +22,21 @@ const InventoryForm = ({
 
   return (
     <Dialog
-      header={isEditMode ? "Edit Inventory" : "Add Inventory"}
+      header={isEditMode ? t("inventory.edit") : t("inventory.add")}
       visible={visible}
       style={{ width: "500px" }}
       onHide={onHide}
       modal
     >
       <div className="mb-3">
-        <label>Product</label>
+        <label>{t("inventory.product")}</label>
 
         <Dropdown
           value={item?.productId}
           options={products}
           optionLabel="name"
           optionValue="id"
-          placeholder="Select Product"
+          placeholder={t("inventory.selectProduct")}
           className="w-100"
           onChange={(e) =>
             setItem({
@@ -46,7 +48,7 @@ const InventoryForm = ({
       </div>
 
       <div className="mb-3">
-        <label>Quantity</label>
+        <label>{t("inventory.quantity")}</label>
 
         <InputNumber
           value={item?.quantity || 0}
@@ -61,7 +63,7 @@ const InventoryForm = ({
       </div>
 
       <Button
-        label={isEditMode ? "Update" : "Create"}
+        label={isEditMode ? t("inventory.update") : t("inventory.create")}
         icon="pi pi-check"
         className="w-100"
         onClick={() => onSubmit(item, isEditMode)}

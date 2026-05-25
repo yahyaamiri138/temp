@@ -104,35 +104,35 @@ const Sidebar = () => {
               <li>
                 <Link to="/inventory">
                   <i className="mdi mdi-package-variant mr-2 ml-2" />
-                  Inventory
+                  {t("sidebar.inventory")}
                 </Link>
               </li>
 
               <li>
                 <Link to="/parties">
                   <i className="mdi mdi-account-multiple mr-2 ml-2" />
-                  Parties
+                  {t("sidebar.parties")}
                 </Link>
               </li>
 
               <li>
                 <Link to="/transactions">
                   <i className="mdi mdi-swap-horizontal mr-2 ml-2" />
-                  Transactions
+                  {t("sidebar.transactions")}
                 </Link>
               </li>
 
               <li>
                 <Link to="/transaction-items">
                   <i className="mdi mdi-format-list-bulleted mr-2 ml-2" />
-                  Transaction Items
+                  {t("sidebar.transactionItems")}
                 </Link>
               </li>
 
               <li>
                 <Link to="/debts">
                   <i className="mdi mdi-cash-multiple mr-2 ml-2" />
-                  Debts
+                  {t("sidebar.debts")}
                 </Link>
               </li>
 

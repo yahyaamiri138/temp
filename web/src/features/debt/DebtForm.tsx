@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
+import { useTranslation } from "react-i18next";
 
 const DebtForm = ({
   visible,
@@ -19,6 +20,8 @@ const DebtForm = ({
     paidAmount: 0,
     type: "TAKE",
   });
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (initialData) {
@@ -51,7 +54,11 @@ const DebtForm = ({
   return (
     <Dialog
       header={
-        isViewMode ? "Debt Details" : isEditMode ? "Edit Debt" : "Add Debt"
+        isViewMode
+          ? t("debts.viewDebt")
+          : isEditMode
+            ? t("debts.editDebt")
+            : t("debts.addDebt")
       }
       visible={visible}
       onHide={onHide}
@@ -61,14 +68,14 @@ const DebtForm = ({
         !isViewMode && (
           <div className="d-flex justify-content-end gap-2">
             <Button
-              label="Cancel"
+              label={t("debts.cancel")}
               icon="pi pi-times"
               className="p-button-text rounded"
               size="small"
               onClick={onHide}
             />
             <Button
-              label={isEditMode ? "Update" : "Create"}
+              label={isEditMode ? t("debts.update") : t("debts.create")}
               className="rounded"
               size="small"
               icon="pi pi-check"
@@ -82,7 +89,7 @@ const DebtForm = ({
         {/* ردیف 1: Amount و Party */}
         <div className="row g-3 mb-3">
           <div className="col-md-6">
-            <FormField label="Amount" required>
+            <FormField label={t("debts.amount")} required>
               <InputNumber
                 value={debt?.amount || 0}
                 onValueChange={(e) =>
@@ -101,14 +108,14 @@ const DebtForm = ({
           </div>
 
           <div className="col-md-6">
-            <FormField label="Party" required>
+            <FormField label={t("debts.party")} required>
               <Dropdown
                 value={debt?.partyId}
                 options={parties}
                 optionLabel="name"
                 optionValue="id"
                 onChange={(e) => setDebt({ ...debt, partyId: e.value })}
-                placeholder="Select Party"
+                placeholder={t("debts.selectParty")}
                 className="w-100"
                 disabled={isViewMode}
                 showClear
@@ -120,7 +127,7 @@ const DebtForm = ({
         {/* ردیف 2: Paid Amount و Debt Type */}
         <div className="row g-3 mb-3">
           <div className="col-md-6">
-            <FormField label="Paid Amount">
+            <FormField label={t("debts.paidAmount")}>
               <InputNumber
                 value={debt?.paidAmount || 0}
                 onValueChange={(e) =>
@@ -139,12 +146,12 @@ const DebtForm = ({
           </div>
 
           <div className="col-md-6">
-            <FormField label="Debt Type" required>
+            <FormField label={t("debts.debtType")} required>
               <Dropdown
                 value={debt?.type}
                 options={[
-                  { label: "TAKE (I owe)", value: "TAKE" },
-                  { label: "GIVE (They owe me)", value: "GIVE" },
+                  { label: t("debts.take"), value: "TAKE" },
+                  { label: t("debts.give"), value: "GIVE" },
                 ]}
                 onChange={(e) =>
                   setDebt({
@@ -162,7 +169,7 @@ const DebtForm = ({
         {/* ردیف 3: Due Date و Remaining Amount (محاسبه خودکار) */}
         <div className="row g-3 mb-3">
           <div className="col-md-6">
-            <FormField label="Due Date">
+            <FormField label={t("debts.dueDate")}>
               <Calendar
                 value={debt?.dueDate ? new Date(debt.dueDate) : null}
                 onChange={(e) =>
@@ -180,7 +187,7 @@ const DebtForm = ({
           </div>
 
           <div className="col-md-6">
-            <FormField label="Remaining Amount">
+            <FormField label={t("debts.remainingAmount")}>
               <InputNumber
                 value={(debt?.amount || 0) - (debt?.paidAmount || 0)}
                 className="w-100"
@@ -199,7 +206,7 @@ const DebtForm = ({
         {/* ردیف 4: Description (تمام عرض) */}
         <div className="row g-3 mb-3">
           <div className="col-12">
-            <FormField label="Description">
+            <FormField label={t("debts.description")}>
               <InputText
                 value={debt?.description || ""}
                 onChange={(e) =>
@@ -222,7 +229,7 @@ const DebtForm = ({
               <div className="alert alert-info">
                 <div className="d-flex justify-content-between align-items-center">
                   <span>
-                    <strong>Status:</strong>{" "}
+                    <strong>{t("debts.status")}:</strong>{" "}
                     {debt.paid ? (
                       <span className="text-success">✓ PAID</span>
                     ) : (
