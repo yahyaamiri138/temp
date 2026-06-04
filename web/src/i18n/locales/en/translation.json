@@ -260,13 +260,14 @@
 
   "transactionItems": {
     "id": "Id",
+    "add": "Add Transaction Item",
     "title": "Transaction Items",
     "product": "Product",
     "quantity": "Qty",
     "price": "Price",
     "party": "Party",
-    "transactionType": "Type",
-    "paymentType": "Payment",
+    "transactionType": "Transaction Type",
+    "paymentType": "Payment Type",
     "actions": "Actions",
     "view": "View",
     "edit": "Edit",

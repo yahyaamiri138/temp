@@ -1,7 +1,6 @@
 package mcit.af.backend_temp.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import mcit.af.backend_temp.enumeration.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +16,15 @@ public class TransactionItem {
     private Long id;
 
     private Integer quantity;
+
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "transaction_id")
     @JsonBackReference
     private Transaction transaction;
 }
